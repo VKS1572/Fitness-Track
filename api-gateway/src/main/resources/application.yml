@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+
+            cors-configurations:
+              "[/**]":
+                allowedOrigins:
+                  - "http://localhost:5173"
+
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+
+                allowedHeaders:
+                  - "*"
+
+                allowCredentials: true
+
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
+
+            - id: activity-service
+              uri: lb://ACTIVITY-SERVICE
+              predicates:
+                - Path=/api/activities/**
+
+            - id: recommendation-service
+              uri: lb://RECOMMENDATION-SERVICE
+              predicates:
+                - Path=/api/recommendations/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+
+  endpoint:
+    gateway:
+      access: read-only
+
+jwt:
+  secret: fitness-app-secret-key-for-jwt-token-generation-2026

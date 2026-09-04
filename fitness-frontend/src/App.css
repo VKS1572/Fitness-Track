@@ -1,0 +1,4731 @@
+/* =========================================================
+   FITTRACK - GLOBAL STYLES
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #172033;
+  background: #f5f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 245px;
+  height: 100vh;
+  padding: 28px 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #101828;
+  color: white;
+
+  z-index: 1000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #101828;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-top: 55px;
+}
+
+.nav-item {
+  width: 100%;
+  padding: 13px 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #98a2b3;
+
+  text-align: left;
+  transition: 0.2s ease;
+}
+
+.nav-item:hover {
+  background: #1d2939;
+  color: white;
+}
+
+.nav-item.active {
+  background: #344054;
+  color: white;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 14px 8px;
+
+  border-top: 1px solid #344054;
+}
+
+.avatar,
+.top-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #344054;
+  color: white;
+}
+
+.user-mini strong,
+.user-mini small {
+  display: block;
+}
+
+.user-mini strong {
+  font-size: 13px;
+}
+
+.user-mini small {
+  margin-top: 2px;
+
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+.logout {
+  width: 100%;
+  padding: 12px 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 0;
+  background: transparent;
+  color: #98a2b3;
+
+  text-align: left;
+}
+
+.logout:hover {
+  color: white;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-content {
+  min-height: 100vh;
+  margin-left: 245px;
+  padding: 42px 50px;
+
+  max-width: 1600px;
+}
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 35px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  color: #667085;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.topbar h1 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 31px;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  margin: 7px 0 0;
+
+  color: #667085;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #e4e7ec;
+  border-radius: 11px;
+
+  background: white;
+  color: #475467;
+}
+
+.top-avatar {
+  background: #101828;
+}
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 17px;
+
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  padding: 22px;
+
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow: 0 5px 20px rgba(16, 24, 40, 0.035);
+}
+
+.stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #667085;
+  font-size: 13px;
+}
+
+.stat-icon {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+}
+
+.stat-icon.blue {
+  background: #eff8ff;
+  color: #1570ef;
+}
+
+.stat-icon.purple {
+  background: #f4f3ff;
+  color: #6938ef;
+}
+
+.stat-icon.orange {
+  background: #fff6ed;
+  color: #f79009;
+}
+
+.stat-icon.green {
+  background: #ecfdf3;
+  color: #039855;
+}
+
+.stat-card > strong {
+  display: block;
+
+  margin-top: 17px;
+
+  color: #172033;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.stat-card p {
+  margin: 7px 0 0;
+
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.positive {
+  color: #039855;
+  font-weight: 700;
+}
+
+/* =========================================================
+   AI COACH
+========================================================= */
+
+.coach-card {
+  position: relative;
+  overflow: hidden;
+
+  margin-bottom: 30px;
+  padding: 30px;
+
+  border-radius: 18px;
+
+  background: #101828;
+  color: white;
+}
+
+.coach-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 720px;
+}
+
+.coach-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #d0d5dd;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.coach-badge span {
+  color: #98a2b3;
+}
+
+.coach-card h2 {
+  margin: 14px 0 8px;
+
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+.coach-card p {
+  margin: 0;
+
+  color: #b8c1cf;
+  line-height: 1.6;
+}
+
+.coach-suggestion {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 20px;
+  padding: 10px 14px;
+
+  border: 1px solid #344054;
+  border-radius: 10px;
+
+  background: #1d2939;
+}
+
+.coach-suggestion span {
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.coach-suggestion strong {
+  font-size: 13px;
+}
+
+.coach-decoration {
+  position: absolute;
+  right: 55px;
+  bottom: -18px;
+
+  color: #344054;
+}
+
+/* =========================================================
+   ACTIVITIES
+========================================================= */
+
+.activities-section {
+  padding: 28px;
+
+  border: 1px solid #eaecf0;
+  border-radius: 18px;
+
+  background: white;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 21px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 16px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #101828;
+  color: white;
+
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.primary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-row {
+  min-height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid #f2f4f7;
+}
+
+.activity-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.activity-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  background: #f2f4f7;
+  color: #344054;
+}
+
+.activity-main h3 {
+  margin: 0;
+
+  color: #344054;
+  font-size: 15px;
+}
+
+.activity-main p {
+  margin: 0;
+  color: #475467;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.activity-metrics {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.activity-metrics div {
+  min-width: 80px;
+}
+
+.activity-metrics span,
+.activity-metrics strong {
+  display: block;
+}
+
+.activity-metrics span {
+  margin-bottom: 5px;
+
+  color: #667085;
+  font-size: 11px;
+}
+
+.activity-metrics strong {
+  color: #344054;
+  font-size: 13px;
+}
+
+.activity-arrow {
+  color: #98a2b3;
+}
+
+/* =========================================================
+   ACTIVITY ACTION BUTTONS
+========================================================= */
+
+.edit-button,
+.delete-button {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: white;
+
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  border: 1px solid #e5e7eb;
+  color: #4f46e5;
+}
+
+.edit-button:hover {
+  border-color: #c7d2fe;
+  background: #eef2ff;
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  border: 1px solid #e5e7eb;
+  color: #ef4444;
+}
+
+.delete-button:hover {
+  border-color: #fecaca;
+  background: #fef2f2;
+  transform: translateY(-1px);
+}
+
+.delete-button:active,
+.edit-button:active {
+  transform: scale(0.95);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+  padding: 60px 20px;
+
+  color: #98a2b3;
+  text-align: center;
+}
+
+.empty-state h3 {
+  margin-bottom: 7px;
+
+  color: #344054;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: rgba(16, 24, 40, 0.58);
+}
+
+.modal {
+  width: min(560px, 100%);
+
+  padding: 28px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow: 0 25px 70px rgba(16, 24, 40, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 26px;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 24px;
+}
+
+.close-button {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #eaecf0;
+  border-radius: 9px;
+
+  background: white;
+  color: #667085;
+}
+
+.close-button:hover {
+  background: #f9fafb;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-field.full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: white;
+  color: #172033;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #667085;
+  box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.1);
+}
+
+.form-field small {
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+.input-with-unit {
+  position: relative;
+}
+
+.input-with-unit input {
+  padding-right: 55px;
+}
+
+.input-with-unit span {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+
+  transform: translateY(-50%);
+
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 28px;
+  padding-top: 20px;
+
+  border-top: 1px solid #eaecf0;
+}
+
+.secondary-button {
+  padding: 11px 17px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 9px;
+
+  background: white;
+  color: #344054;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   ERROR / LOADING
+========================================================= */
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+  padding: 11px 14px;
+
+  border: 1px solid #fecdca;
+  border-radius: 9px;
+
+  background: #fef3f2;
+  color: #b42318;
+
+  font-size: 13px;
+}
+
+.error-banner button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.loading-screen {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 15px;
+
+  color: #667085;
+}
+
+.loader {
+  width: 36px;
+  height: 36px;
+
+  border: 3px solid #eaecf0;
+  border-top-color: #101828;
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-screen p {
+  margin: 0;
+  font-size: 14px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  margin-bottom: 30px;
+}
+
+.profile-header h1 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 31px;
+  letter-spacing: -1px;
+}
+
+.profile-card {
+  padding: 30px;
+
+  border: 1px solid #eaecf0;
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow: 0 5px 20px rgba(16, 24, 40, 0.035);
+}
+
+.profile-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-bottom: 28px;
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid #eaecf0;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #101828;
+  color: white;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-user h2 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 20px;
+}
+
+.profile-user p {
+  margin: 5px 0 0;
+
+  color: #667085;
+  font-size: 13px;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.profile-form-grid .full {
+  grid-column: 1 / -1;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 28px;
+  padding-top: 20px;
+
+  border-top: 1px solid #eaecf0;
+}
+
+.profile-success,
+.profile-error {
+  margin-top: 20px;
+  padding: 12px 14px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+}
+
+.profile-success {
+  border: 1px solid #abefc6;
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.profile-error {
+  border: 1px solid #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+.settings-page {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+  padding: 40px 32px 60px;
+}
+
+.settings-header {
+  margin-bottom: 28px;
+}
+
+.settings-header h1 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 32px;
+}
+
+.settings-header .subtitle {
+  margin-top: 8px;
+
+  color: #64748b;
+  font-size: 15px;
+}
+
+.settings-card {
+  width: 100%;
+
+  margin-bottom: 22px;
+  padding: 26px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.settings-section-title {
+  margin-bottom: 8px;
+}
+
+.settings-section-title h2 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 19px;
+}
+
+.settings-section-title p {
+  margin: 6px 0 20px;
+
+  color: #64748b;
+  font-size: 14px;
+}
+
+.setting-row {
+  width: 100%;
+  min-height: 74px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 18px 0;
+
+  border-top: 1px solid #e2e8f0;
+}
+
+.setting-row:first-of-type {
+  border-top: 0;
+}
+
+.setting-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.setting-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.setting-info h3 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.setting-info p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Toggle */
+
+.toggle {
+  position: relative;
+
+  width: 50px;
+  min-width: 50px;
+  height: 28px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #cbd5e1;
+
+  transition: background 0.25s ease;
+}
+
+.toggle span {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  transition: transform 0.25s ease;
+}
+
+.toggle.active {
+  background: #2563eb;
+}
+
+.toggle.active span {
+  transform: translateX(22px);
+}
+
+/* Settings logout */
+
+.settings-logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  background: #fff1f2;
+  color: #dc2626;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.settings-logout-button:hover {
+  background: #fee2e2;
+}
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+.analytics-page {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+  padding: 40px 32px 60px;
+}
+
+.analytics-header {
+  margin-bottom: 28px;
+}
+
+.analytics-header h1 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 32px;
+}
+
+.analytics-header .subtitle {
+  margin-top: 8px;
+
+  color: #64748b;
+}
+
+/* Analytics stats */
+
+.analytics-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+
+  margin-bottom: 22px;
+}
+
+.analytics-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 20px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05);
+}
+
+.analytics-stat-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+}
+
+.analytics-stat-icon.blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.analytics-stat-icon.purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.analytics-stat-icon.orange {
+  background: #fff7ed;
+  color: #f97316;
+}
+
+.analytics-stat-icon.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.analytics-stat-card p {
+  margin: 0;
+
+  color: #64748b;
+  font-size: 13px;
+}
+
+.analytics-stat-card h2 {
+  margin: 5px 0 0;
+
+  color: #0f172a;
+  font-size: 24px;
+}
+
+/* Analytics cards */
+
+.analytics-card {
+  margin-bottom: 22px;
+  padding: 26px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+}
+
+.analytics-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.analytics-card-header h2 {
+  margin: 0;
+
+  color: #0f172a;
+  font-size: 19px;
+}
+
+.analytics-card-header p:not(.eyebrow) {
+  margin: 6px 0 0;
+
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Weekly chart */
+
+.weekly-chart {
+  height: 260px;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 16px;
+
+  padding: 20px 10px 0;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.chart-column {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  min-width: 35px;
+}
+
+.chart-value {
+  height: 22px;
+
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chart-bar-wrapper {
+  width: 100%;
+  max-width: 42px;
+  height: 180px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chart-bar {
+  width: 100%;
+  min-height: 5px;
+
+  border-radius: 8px 8px 3px 3px;
+
+  background: linear-gradient(
+    to top,
+    #2563eb,
+    #60a5fa
+  );
+
+  transition:
+    height 0.4s ease,
+    transform 0.2s ease;
+}
+
+.chart-bar:hover {
+  transform: translateY(-3px);
+}
+
+.chart-day {
+  margin-top: 12px;
+
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Analytics history */
+
+.analytics-history {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px 0;
+
+  border-top: 1px solid #eef2f6;
+}
+
+.history-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.history-info {
+  flex: 1;
+}
+
+.history-info h3 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 14px;
+}
+
+.history-info p {
+  margin: 4px 0 0;
+
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.history-value {
+  text-align: right;
+}
+
+.history-value strong,
+.history-value span {
+  display: block;
+}
+
+.history-value strong {
+  color: #172033;
+  font-size: 13px;
+}
+
+.history-value span {
+  margin-top: 4px;
+
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* Empty analytics */
+
+.analytics-empty,
+.analytics-loading {
+  padding: 50px 20px;
+
+  color: #94a3b8;
+  text-align: center;
+}
+
+.analytics-error {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+
+  border: 1px solid #fecdca;
+  border-radius: 9px;
+
+  background: #fef3f2;
+  color: #b42318;
+}
+
+/* =========================================================
+   ANALYTICS INSIGHTS
+========================================================= */
+
+.analytics-insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  margin: 20px 0;
+}
+
+.insight-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 22px;
+
+  border: 1px solid #e8ebf0;
+  border-radius: 16px;
+
+  background: white;
+
+  transition: 0.2s ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.insight-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #f3f5f8;
+
+  font-size: 23px;
+}
+
+.insight-card p {
+  margin: 0 0 5px;
+
+  color: #7b8494;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.insight-card h3 {
+  margin: 0;
+
+  color: #151922;
+  font-size: 19px;
+}
+
+.insight-card span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #8a93a3;
+  font-size: 12px;
+}
+
+/* =========================================================
+   FITNESS GOALS
+========================================================= */
+
+.goals-card {
+  margin-top: 20px;
+}
+
+.goal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  margin-top: 10px;
+}
+
+.goal-item {
+  width: 100%;
+}
+
+.goal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.goal-top h3 {
+  margin: 0 0 5px;
+
+  color: #171b24;
+  font-size: 15px;
+}
+
+.goal-top span {
+  color: #7c8492;
+  font-size: 13px;
+}
+
+.goal-top strong {
+  color: #4f46e5;
+  font-size: 18px;
+}
+
+.goal-progress {
+  width: 100%;
+  height: 9px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #edf0f4;
+}
+
+.goal-progress span {
+  display: block;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #4f46e5;
+
+  transition: width 0.5s ease;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: #080b12;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 40px;
+
+  border: 1px solid #252c38;
+  border-radius: 24px;
+
+  background: #111620;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.auth-logo {
+  margin-bottom: 25px;
+
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.auth-logo span {
+  color: #22c55e;
+}
+
+.auth-card h1 {
+  margin-bottom: 8px;
+
+  color: white;
+  text-align: center;
+}
+
+.auth-subtitle {
+  margin-bottom: 30px;
+
+  color: #8b95a5;
+  text-align: center;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #303846;
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #0b1018;
+  color: white;
+}
+
+.input-group input:focus {
+  border-color: #22c55e;
+}
+
+.auth-button {
+  width: 100%;
+
+  margin-top: 8px;
+  padding: 14px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #22c55e;
+  color: #061008;
+
+  font-weight: 700;
+}
+
+.auth-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error,
+.auth-success {
+  margin-bottom: 15px;
+  padding: 12px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+}
+
+.auth-error {
+  background: #3b1118;
+  color: #ff8d9a;
+}
+
+.auth-success {
+  background: #0d321c;
+  color: #65e38a;
+}
+
+.auth-footer {
+  margin-top: 24px;
+
+  color: #8b95a5;
+  text-align: center;
+}
+
+.auth-footer button {
+  margin-left: 5px;
+
+  border: 0;
+  background: transparent;
+
+  color: #22c55e;
+  font-weight: 700;
+}
+
+/* =========================================================
+   MOBILE HEADER
+========================================================= */
+
+.mobile-header {
+  display: none;
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Main */
+
+body.dark-mode .main-content {
+  background: #0f172a;
+}
+
+body.dark-mode .topbar h1,
+body.dark-mode .profile-header h1,
+body.dark-mode .analytics-header h1,
+body.dark-mode .settings-header h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .topbar .subtitle,
+body.dark-mode .analytics-header .subtitle,
+body.dark-mode .settings-header .subtitle {
+  color: #94a3b8;
+}
+
+body.dark-mode .eyebrow {
+  color: #94a3b8;
+}
+
+/* Dashboard cards */
+
+body.dark-mode .stat-card,
+body.dark-mode .activities-section,
+body.dark-mode .profile-card,
+body.dark-mode .analytics-stat-card,
+body.dark-mode .analytics-card,
+body.dark-mode .settings-card,
+body.dark-mode .insight-card {
+  border-color: #263449;
+  background: #172033;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Stats */
+
+body.dark-mode .stat-top {
+  color: #cbd5e1;
+}
+
+body.dark-mode .stat-card > strong,
+body.dark-mode .stat-card p {
+  color: #f8fafc;
+}
+
+body.dark-mode .stat-card p {
+  color: #94a3b8;
+}
+
+/* Activities */
+
+body.dark-mode .section-heading h2,
+body.dark-mode .activity-main h3,
+body.dark-mode .activity-metrics strong {
+  color: #f8fafc;
+}
+
+body.dark-mode .activity-main p,
+body.dark-mode .activity-metrics span {
+  color: #94a3b8;
+}
+
+body.dark-mode .activity-row {
+  border-top-color: #263449;
+}
+
+body.dark-mode .activity-icon,
+body.dark-mode .history-icon,
+body.dark-mode .insight-icon,
+body.dark-mode .setting-icon {
+  background: #243148;
+  color: #cbd5e1;
+}
+
+/* Buttons */
+
+body.dark-mode .notification {
+  border-color: #334155;
+  background: #172033;
+  color: #cbd5e1;
+}
+
+body.dark-mode .edit-button,
+body.dark-mode .delete-button {
+  border-color: #334155;
+  background: #172033;
+}
+
+body.dark-mode .edit-button:hover {
+  background: #1e293b;
+}
+
+body.dark-mode .delete-button:hover {
+  background: #3f1d25;
+}
+
+/* Modal */
+
+body.dark-mode .modal {
+  background: #172033;
+  color: #e2e8f0;
+}
+
+body.dark-mode .modal-header h2,
+body.dark-mode .form-field label {
+  color: #f8fafc;
+}
+
+body.dark-mode .close-button,
+body.dark-mode .secondary-button {
+  border-color: #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+body.dark-mode .form-field input,
+body.dark-mode .form-field select {
+  border-color: #334155;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+body.dark-mode .modal-actions {
+  border-top-color: #334155;
+}
+
+/* Profile */
+
+body.dark-mode .profile-user {
+  border-bottom-color: #263449;
+}
+
+body.dark-mode .profile-user h2 {
+  color: #f8fafc;
+}
+
+body.dark-mode .profile-user p {
+  color: #94a3b8;
+}
+
+body.dark-mode .profile-actions {
+  border-top-color: #263449;
+}
+
+/* Settings */
+
+body.dark-mode .settings-section-title h2,
+body.dark-mode .setting-info h3 {
+  color: #f8fafc;
+}
+
+body.dark-mode .settings-section-title p,
+body.dark-mode .setting-info p {
+  color: #94a3b8;
+}
+
+body.dark-mode .setting-row {
+  border-top-color: #263449;
+}
+
+body.dark-mode .toggle {
+  background: #475569;
+}
+
+body.dark-mode .toggle.active {
+  background: #3b82f6;
+}
+
+body.dark-mode .settings-logout-button {
+  border-color: #7f1d1d;
+  background: #3f1d25;
+  color: #fca5a5;
+}
+
+/* Analytics */
+
+body.dark-mode .analytics-stat-card p,
+body.dark-mode .analytics-card-header p:not(.eyebrow),
+body.dark-mode .history-info p,
+body.dark-mode .history-value span {
+  color: #94a3b8;
+}
+
+body.dark-mode .analytics-stat-card h2,
+body.dark-mode .analytics-card-header h2,
+body.dark-mode .history-info h3,
+body.dark-mode .history-value strong {
+  color: #f8fafc;
+}
+
+body.dark-mode .weekly-chart,
+body.dark-mode .history-row {
+  border-color: #263449;
+}
+
+body.dark-mode .chart-day {
+  color: #94a3b8;
+}
+
+body.dark-mode .chart-bar {
+  background: linear-gradient(
+    to top,
+    #3b82f6,
+    #60a5fa
+  );
+}
+
+/* Insights */
+
+body.dark-mode .insight-card h3 {
+  color: #f5f7fa;
+}
+
+body.dark-mode .insight-card p,
+body.dark-mode .insight-card span {
+  color: #94a3b8;
+}
+
+/* Goals */
+
+body.dark-mode .goal-top h3 {
+  color: #f5f7fa;
+}
+
+body.dark-mode .goal-top span {
+  color: #9299a8;
+}
+
+body.dark-mode .goal-progress {
+  background: #292e38;
+}
+
+/* Empty */
+
+body.dark-mode .empty-state,
+body.dark-mode .analytics-empty,
+body.dark-mode .analytics-loading {
+  color: #94a3b8;
+}
+
+body.dark-mode .empty-state h3 {
+  color: #f8fafc;
+}
+
+/* Mobile header */
+
+body.dark-mode .mobile-header {
+  background: #0b1220;
+}
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .main-content {
+    padding: 35px;
+  }
+
+  .stats-grid,
+  .analytics-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .activity-row {
+    gap: 16px;
+  }
+
+  .activity-metrics {
+    gap: 16px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .desktop-brand {
+    display: none;
+  }
+
+  .mobile-header {
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+
+    background: #101828;
+    color: white;
+  }
+
+  .mobile-header .brand {
+    font-size: 18px;
+  }
+
+  .mobile-header .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-button {
+    border: 0;
+    background: transparent;
+    color: white;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 80px 18px 30px;
+  }
+
+  .topbar h1 {
+    font-size: 26px;
+  }
+
+  .topbar-actions {
+    display: none;
+  }
+
+  .stats-grid,
+  .analytics-stats,
+  .analytics-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .coach-card {
+    padding: 24px;
+  }
+
+  .coach-decoration {
+    display: none;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .activity-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+
+    padding: 16px 0;
+  }
+
+  .activity-metrics {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr auto auto;
+    gap: 10px;
+  }
+
+  .activity-arrow {
+    display: none;
+  }
+
+  .form-grid,
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full,
+  .profile-form-grid .full {
+    grid-column: auto;
+  }
+
+  .modal {
+    width: calc(100% - 28px);
+    max-height: calc(100vh - 30px);
+
+    overflow-y: auto;
+  }
+
+  .settings-page,
+  .analytics-page {
+    padding: 25px 18px 40px;
+  }
+
+  .profile-card,
+  .analytics-card,
+  .settings-card {
+    padding: 20px;
+  }
+
+  .setting-row {
+    align-items: flex-start;
+  }
+
+  .setting-info {
+    align-items: flex-start;
+  }
+
+  .goal-top h3 {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .topbar h1 {
+    font-size: 23px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .activities-section {
+    padding: 20px;
+  }
+
+  .activity-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .edit-button,
+  .delete-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .activity-main {
+    gap: 12px;
+  }
+
+  .modal {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .auth-card {
+    padding: 28px 20px;
+  }
+
+  .name-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+/* =========================================================
+   DASHBOARD POLISH
+========================================================= */
+
+.dashboard-welcome h1 {
+  margin: 6px 0 8px;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #172033;
+}
+
+.dashboard-welcome h1 span {
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.dashboard-welcome .subtitle {
+  margin: 0;
+  color: #667085;
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   STAT CARD POLISH
+========================================================= */
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.stat-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -35px;
+  bottom: -40px;
+  border-radius: 50%;
+  background: rgba(79, 70, 229, 0.035);
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 18px;
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #172033;
+}
+
+.stat-card p {
+  margin-top: 10px;
+  color: #667085;
+  font-size: 13px;
+}
+
+.stat-top > span {
+  color: #667085;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   AI COACH POLISH
+========================================================= */
+
+.coach-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 26px;
+  padding: 28px 30px;
+  background: linear-gradient(
+    135deg,
+    #111827 0%,
+    #182338 55%,
+    #202b45 100%
+  );
+  box-shadow: 0 14px 35px rgba(16, 24, 40, 0.16);
+}
+
+.coach-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.coach-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #dbe4ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.coach-badge span {
+  font-size: 15px;
+}
+
+.coach-card h2 {
+  margin: 0;
+  max-width: 700px;
+  color: #ffffff;
+  font-size: 23px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+
+.coach-card p {
+  margin: 10px 0 18px;
+  max-width: 680px;
+  color: #b8c2d6;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.coach-suggestion {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.coach-suggestion span {
+  color: #aeb9cc;
+  font-size: 12px;
+}
+
+.coach-suggestion strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.coach-decoration {
+  position: absolute;
+  right: 45px;
+  bottom: -20px;
+  color: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   ACTIVITIES SECTION
+========================================================= */
+
+.activities-section {
+  margin-top: 32px;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin-top: 5px;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #172033;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-row {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.activity-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.07);
+}
+
+.activity-main h3 {
+  text-transform: capitalize;
+}
+
+.activity-main p {
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   ACTIVITY METRICS
+========================================================= */
+
+.activity-metrics > div {
+  min-width: 82px;
+}
+
+.activity-metrics span {
+  display: block;
+  margin-bottom: 4px;
+  color: #98a2b3;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.activity-metrics strong {
+  color: #344054;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.edit-button,
+.delete-button {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  transform: translateY(-1px);
+}
+
+.edit-button:hover {
+  background: #eef2ff;
+}
+
+.delete-button:hover {
+  background: #fef2f2;
+}
+
+
+/* =========================================================
+   LIGHT MODE CONTRAST FIX
+========================================================= */
+
+body:not(.dark-mode) .main-content h1,
+body:not(.dark-mode) .main-content h2,
+body:not(.dark-mode) .main-content h3 {
+  color: #172033;
+}
+
+body:not(.dark-mode) .main-content .subtitle,
+body:not(.dark-mode) .main-content .stat-card p {
+  color: #667085;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .dashboard-welcome h1 {
+    font-size: 26px;
+  }
+
+  .coach-card {
+    padding: 22px;
+  }
+
+  .coach-card h2 {
+    font-size: 19px;
+  }
+
+  .coach-decoration {
+    right: -10px;
+    opacity: 0.5;
+  }
+
+  .activity-row {
+    align-items: flex-start;
+  }
+
+  .activity-metrics {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+
+  .dashboard-welcome h1 {
+    font-size: 23px;
+  }
+
+  .coach-card {
+    padding: 20px;
+  }
+
+  .coach-suggestion {
+    flex-wrap: wrap;
+  }
+
+  .activity-metrics {
+    width: 100%;
+  }
+
+  .activity-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+/* =========================================================
+   WEEKLY PROGRESS
+========================================================= */
+
+.weekly-progress-section {
+  margin-top: 32px;
+}
+
+.weekly-target {
+  color: #98a2b3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.weekly-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.progress-card {
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.progress-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.07);
+}
+
+.progress-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #667085;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.progress-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.progress-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.progress-value strong {
+  color: #172033;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.progress-value span {
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 7px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef1f5;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.5s ease;
+}
+
+.blue-fill {
+  background: #4f7cff;
+}
+
+.purple-fill {
+  background: #8b5cf6;
+}
+
+.orange-fill {
+  background: #f59e0b;
+}
+
+.progress-card p {
+  margin: 9px 0 0;
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  .weekly-progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* AI Coach text visibility fix */
+.coach-card h2 {
+  color: #ffffff !important;
+}
+
+.coach-card p {
+  color: #c4d0e3 !important;
+}
+
+.coach-card .coach-suggestion span {
+  color: #b8c4d8 !important;
+}
+
+.coach-card .coach-suggestion strong {
+  color: #ffffff !important;
+}
+/* =========================================================
+   RECENT ACTIVITIES POLISH
+========================================================= */
+
+.activity-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 15px;
+}
+
+.activity-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.activity-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.activity-main h3 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  font-weight: 750;
+  color: #172033;
+}
+
+.activity-main p {
+  margin: 0;
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.activity-metrics {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.activity-metrics > div {
+  min-width: 75px;
+}
+
+.activity-metrics span {
+  display: block;
+  margin-bottom: 4px;
+  color: #98a2b3;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.activity-metrics strong {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.edit-button,
+.delete-button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #eaecf0;
+  background: #ffffff;
+  color: #667085;
+}
+
+.edit-button:hover {
+  color: #4f46e5;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.delete-button:hover {
+  color: #dc2626;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+
+/* =========================================================
+   MOBILE ACTIVITIES
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .activity-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .activity-metrics {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .activity-metrics > div {
+    min-width: auto;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .activity-metrics {
+    flex-wrap: wrap;
+  }
+
+  .activity-metrics > div {
+    flex: 1;
+    min-width: 90px;
+  }
+
+}
+/* =========================================================
+   DARK MODE - DASHBOARD FIX
+========================================================= */
+
+body.dark-mode {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+/* Main dashboard text */
+
+body.dark-mode .dashboard-welcome h1,
+body.dark-mode .section-heading h2 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .dashboard-welcome .subtitle {
+  color: #94a3b8 !important;
+}
+
+
+/* Weekly Progress */
+
+body.dark-mode .progress-card {
+  background: #172033;
+  border-color: #273449;
+}
+
+body.dark-mode .progress-card-top {
+  color: #cbd5e1;
+}
+
+body.dark-mode .progress-value strong {
+  color: #f8fafc;
+}
+
+body.dark-mode .progress-value span {
+  color: #94a3b8;
+}
+
+body.dark-mode .progress-track {
+  background: #2b3648;
+}
+
+body.dark-mode .progress-card p {
+  color: #94a3b8;
+}
+
+body.dark-mode .weekly-target {
+  color: #94a3b8;
+}
+
+
+/* Recent Activities */
+
+body.dark-mode .activities-section {
+  color: #f8fafc;
+}
+
+body.dark-mode .activity-row {
+  background: #172033;
+  border-color: #273449;
+}
+
+body.dark-mode .activity-main h3 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .activity-main p {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .activity-metrics span {
+  color: #94a3b8;
+}
+
+body.dark-mode .activity-metrics strong {
+  color: #e2e8f0;
+}
+
+
+/* Activity icon */
+
+body.dark-mode .activity-icon {
+  background: #26344d;
+  color: #93a4ff;
+}
+
+
+/* Edit / Delete buttons */
+
+body.dark-mode .edit-button,
+body.dark-mode .delete-button {
+  background: #111827;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .edit-button:hover {
+  background: #27345a;
+  color: #a5b4fc;
+}
+
+body.dark-mode .delete-button:hover {
+  background: #3a2024;
+  color: #f87171;
+}
+
+
+/* Add Activity button */
+
+body.dark-mode .primary-button {
+  color: #ffffff;
+}
+
+
+/* AI Coach */
+
+body.dark-mode .coach-card h2 {
+  color: #ffffff !important;
+}
+
+body.dark-mode .coach-card p {
+  color: #cbd5e1 !important;
+}
+
+
+/* Stats */
+
+body.dark-mode .stat-card strong {
+  color: #f8fafc;
+}
+
+body.dark-mode .stat-card p {
+  color: #94a3b8;
+}
+
+body.dark-mode .stat-top > span {
+  color: #cbd5e1;
+}
+/* =========================================================
+   ACTIVITIES PAGE - REDESIGN
+   ========================================================= */
+
+.activities-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   ACTIVITIES HEADER - SAME AS ANALYTICS
+========================================================= */
+
+/* =========================================================
+   WORKOUT LIBRARY HEADER
+   Same visual treatment as Analytics
+========================================================= */
+
+.activities-page-header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+
+.activities-page-header > div:first-child {
+  width: 100%;
+}
+
+.activities-page-header .page-eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #7c3aed;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.activities-page-header h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.activities-page-header p {
+  margin: 8px 0 0;
+
+  color: #64748b;
+
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.activities-page-header .activities-add-button {
+  position: absolute;
+
+  top: 50%;
+  right: 0;
+
+  transform: translateY(-50%);
+}
+
+
+/* Dark mode */
+body.dark-mode .activities-page-header h1 {
+  color: #f8fafc;
+}
+
+body.dark-mode .activities-page-header p {
+  color: #94a3b8;
+}
+
+body.dark-mode .activities-page-header .page-eyebrow {
+  color: #a8c85b;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .activities-page-header {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 18px;
+
+    text-align: center;
+  }
+
+  .activities-page-header > div:first-child {
+    width: 100%;
+  }
+
+  .activities-page-header h1 {
+    font-size: 28px;
+  }
+
+  .activities-page-header p {
+    font-size: 14px;
+  }
+
+  .activities-page-header .activities-add-button {
+    position: static;
+
+    width: 100%;
+
+    transform: none;
+  }
+}
+
+
+
+/* Add button */
+
+.activities-add-button {
+  min-width: 150px;
+  justify-content: center;
+}
+
+
+/* Overview */
+
+.activity-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.activity-overview-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 16px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.activity-overview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+}
+
+.activity-overview-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3e8ff;
+  color: #7c3aed;
+  flex-shrink: 0;
+}
+
+.activity-overview-card span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #737887;
+  font-weight: 600;
+}
+
+.activity-overview-card strong {
+  display: block;
+  font-size: 22px;
+  color: #18181b;
+}
+
+
+/* Toolbar */
+
+.activity-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 16px;
+}
+
+.activity-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 560px;
+}
+
+.activity-search > svg {
+  position: absolute;
+  left: 15px;
+  color: #9297a3;
+}
+
+.activity-search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 42px;
+  border: 1px solid #e1e4ea;
+  border-radius: 11px;
+  outline: none;
+  background: #f8f9fb;
+  color: #18181b;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.activity-search input:focus {
+  border-color: #8b5cf6;
+  background: #ffffff;
+}
+
+.activity-search-clear {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #888e9b;
+  cursor: pointer;
+}
+
+.activity-filter-group {
+  display: flex;
+  gap: 10px;
+}
+
+.activity-filter-group select {
+  height: 44px;
+  min-width: 155px;
+  padding: 0 34px 0 12px;
+  border: 1px solid #e1e4ea;
+  border-radius: 11px;
+  background: #f8f9fb;
+  color: #33363f;
+  outline: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+
+/* History */
+
+.activity-history-card {
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 18px;
+  padding: 26px;
+}
+
+.activity-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.activity-history-header h2 {
+  margin: 5px 0 0;
+  font-size: 21px;
+  color: #18181b;
+}
+
+.activity-count {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  color: #555b67;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* Activity rows */
+
+.activity-history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-management-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.4fr) minmax(230px, 1fr) auto;
+  align-items: center;
+  gap: 25px;
+  padding: 20px 4px;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.activity-management-row:last-child {
+  border-bottom: none;
+}
+
+.activity-management-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.activity-management-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.activity-management-info {
+  min-width: 0;
+}
+
+.activity-management-title {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #202124;
+  text-transform: capitalize;
+}
+
+.activity-management-date {
+  color: #858a96;
+  font-size: 12px;
+}
+
+
+.activity-management-metrics {
+  display: flex;
+  gap: 32px;
+}
+
+.management-metric span {
+  display: block;
+  margin-bottom: 5px;
+  color: #9297a3;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.management-metric strong {
+  font-size: 14px;
+  color: #292b31;
+}
+
+
+.activity-management-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.activity-management-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 11px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.activity-management-actions .edit-button {
+  border: 1px solid #ddd6fe;
+  background: #faf5ff;
+  color: #7c3aed;
+}
+
+.activity-management-actions .edit-button:hover {
+  background: #f3e8ff;
+}
+
+.activity-management-actions .delete-button {
+  border: 1px solid #fecaca;
+  background: #fff7f7;
+  color: #dc2626;
+}
+
+.activity-management-actions .delete-button:hover {
+  background: #fee2e2;
+}
+
+
+/* Empty */
+
+.activity-empty-state {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.activity-empty-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.activity-empty-state h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.activity-empty-state p {
+  max-width: 390px;
+  margin: 0 0 20px;
+  color: #858a96;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.secondary-button {
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid #dfe2e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #40434a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* Dark mode */
+
+.dark .activity-overview-card,
+.dark .activity-toolbar,
+.dark .activity-history-card {
+  background: #17181c;
+  border-color: #292c33;
+}
+
+.dark .activity-page-header h1,
+.dark .activities-page-header h1,
+.dark .activity-history-header h2 {
+  color: #f5f5f5;
+}
+
+.dark .activities-page-header p,
+.dark .activity-management-date,
+.dark .activity-overview-card span,
+.dark .management-metric span {
+  color: #9ca3af;
+}
+
+.dark .activity-overview-card strong,
+.dark .management-metric strong,
+.dark .activity-management-title {
+  color: #f3f4f6;
+}
+
+.dark .activity-search input,
+.dark .activity-filter-group select {
+  background: #202228;
+  border-color: #343740;
+  color: #f3f4f6;
+}
+
+.dark .activity-search input:focus {
+  background: #202228;
+  border-color: #8b5cf6;
+}
+
+.dark .activity-history-header,
+.dark .activity-management-row {
+  border-color: #292c33;
+}
+
+.dark .activity-count {
+  background: #25272e;
+  color: #c5c8d0;
+}
+
+.dark .activity-management-actions .edit-button {
+  background: #241936;
+  border-color: #4c2d72;
+}
+
+.dark .activity-management-actions .delete-button {
+  background: #321b1b;
+  border-color: #632b2b;
+}
+
+.dark .secondary-button {
+  background: #202228;
+  border-color: #343740;
+  color: #f3f4f6;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+
+  .activity-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .activity-management-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .activity-management-metrics {
+    grid-column: 1 / -1;
+    padding-left: 62px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .activities-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .activities-add-button {
+    width: 100%;
+  }
+
+  .activity-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .activity-search {
+    max-width: none;
+  }
+
+  .activity-filter-group {
+    width: 100%;
+  }
+
+  .activity-filter-group select {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .activity-management-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .activity-management-metrics {
+    padding-left: 0;
+  }
+
+  .activity-management-actions {
+    width: 100%;
+  }
+
+  .activity-management-actions button {
+    flex: 1;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .activity-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-history-card {
+    padding: 18px;
+  }
+
+  .activity-history-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .activity-filter-group {
+    flex-direction: column;
+  }
+
+  .activity-management-metrics {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+}
+/* =========================================================
+   GLOBAL LANDING FIX
+========================================================= */
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+/* =========================================================
+   FITTRACK PREMIUM DARK THEME
+   Background + Theme Only
+   ========================================================= */
+
+.app {
+  background: #080908;
+}
+
+/* Main fitness background */
+.main-content {
+  position: relative;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 9, 8, 0.96) 0%,
+      rgba(8, 9, 8, 0.90) 45%,
+      rgba(8, 9, 8, 0.95) 100%
+    ),
+    url("/fitness-background.jpg") center / cover fixed no-repeat;
+
+  color: #f5f7e8;
+}
+
+/* Subtle dark layer */
+.main-content::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  margin-left: 245px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 75% 15%,
+      rgba(201, 255, 56, 0.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(201, 255, 56, 0.035),
+      transparent 30%
+    );
+  z-index: 0;
+}
+
+.main-content > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+.main-content .topbar h1,
+.main-content .dashboard-welcome h1,
+.main-content .section-heading h2 {
+  color: #f5f7e8 !important;
+}
+
+.main-content .subtitle,
+.main-content .dashboard-welcome .subtitle {
+  color: #9aa394 !important;
+}
+
+.main-content .eyebrow {
+  color: #9fb76a !important;
+}
+
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.app .stat-card {
+  background: rgba(18, 21, 18, 0.88);
+  border: 1px solid rgba(201, 255, 56, 0.10);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.app .stat-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(201, 255, 56, 0.25);
+
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(201, 255, 56, 0.035);
+}
+
+.app .stat-card > strong {
+  color: #f5f7e8 !important;
+}
+
+.app .stat-card p {
+  color: #8f998d !important;
+}
+
+.app .stat-top {
+  color: #aeb8aa !important;
+}
+
+
+/* =========================================================
+   WEEKLY PROGRESS
+   ========================================================= */
+
+.app .progress-card {
+  background: rgba(18, 21, 18, 0.88);
+  border: 1px solid rgba(201, 255, 56, 0.10);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.app .progress-card-top {
+  color: #aeb8aa !important;
+}
+
+.app .progress-value strong {
+  color: #f5f7e8 !important;
+}
+
+.app .progress-value span,
+.app .progress-card p {
+  color: #8f998d !important;
+}
+
+.app .progress-track {
+  background: #252b24 !important;
+}
+
+
+/* =========================================================
+   LIME PROGRESS
+   ========================================================= */
+
+.app .blue-fill {
+  background: #c9ff38;
+}
+
+.app .purple-fill {
+  background: #b7ef45;
+}
+
+.app .orange-fill {
+  background: #d7ff70;
+}
+
+
+/* =========================================================
+   RECENT ACTIVITIES
+   ========================================================= */
+
+.app .activity-row {
+  background: rgba(18, 21, 18, 0.88);
+  border: 1px solid rgba(201, 255, 56, 0.10);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.24);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.app .activity-row:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 255, 56, 0.20);
+}
+
+.app .activity-main h3 {
+  color: #f5f7e8 !important;
+}
+
+.app .activity-main p {
+  color: #8f998d !important;
+}
+
+.app .activity-metrics span {
+  color: #7f897d !important;
+}
+
+.app .activity-metrics strong {
+  color: #dce5d8 !important;
+}
+
+
+/* =========================================================
+   ACTIVITY ICON
+   ========================================================= */
+
+.app .activity-icon {
+  background: rgba(201, 255, 56, 0.09);
+  color: #c9ff38;
+}
+
+
+/* =========================================================
+   EDIT / DELETE BUTTONS
+   ========================================================= */
+
+.app .edit-button,
+.app .delete-button {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #aeb8aa;
+}
+
+.app .edit-button:hover {
+  background: rgba(201, 255, 56, 0.08);
+  border-color: rgba(201, 255, 56, 0.20);
+  color: #c9ff38;
+}
+
+.app .delete-button:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.20);
+  color: #ff7373;
+}
+
+
+/* =========================================================
+   AI FITNESS COACH
+   ========================================================= */
+
+.app .coach-card {
+  border: 1px solid rgba(201, 255, 56, 0.14);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(201, 255, 56, 0.035);
+}
+
+
+/* =========================================================
+   TOPBAR ACTIONS
+   ========================================================= */
+
+.app .notification {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.app .top-avatar {
+  background: #111812;
+  border: 1px solid rgba(201, 255, 56, 0.15);
+  color: #c9ff38;
+}
+
+
+/* =========================================================
+   SIDEBAR - MATCH FITNESS THEME
+   ========================================================= */
+
+.app .sidebar {
+  background:
+    linear-gradient(
+      180deg,
+      #0d120f 0%,
+      #080c09 100%
+    );
+
+  border-right: 1px solid rgba(201, 255, 56, 0.08);
+}
+
+.app .brand-icon {
+  background: #c9ff38;
+  color: #080908;
+}
+
+.app .brand span {
+  color: #f5f7e8;
+}
+
+.app .nav-item {
+  color: #899488;
+}
+
+.app .nav-item:hover {
+  color: #dce5d8;
+  background: rgba(201, 255, 56, 0.055);
+}
+
+.app .nav-item.active {
+  background: rgba(201, 255, 56, 0.10);
+  color: #c9ff38;
+  border: 1px solid rgba(201, 255, 56, 0.12);
+}
+
+
+/* =========================================================
+   SIDEBAR USER
+   ========================================================= */
+
+.app .sidebar-bottom {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.app .avatar {
+  background: #172017;
+  color: #c9ff38;
+}
+
+.app .user-mini strong {
+  color: #f5f7e8;
+}
+
+.app .user-mini small {
+  color: #7f897d;
+}
+
+.app .logout {
+  color: #899488;
+}
+
+.app .logout:hover {
+  color: #c9ff38;
+}
+
+
+/* =========================================================
+   WEEKLY TARGET
+   ========================================================= */
+
+.app .weekly-target {
+  color: #8f998d;
+}
+
+
+/* =========================================================
+   FITTRACK - FINAL TEXT VISIBILITY FIX
+   ========================================================= */
+
+/* ---------- DARK PAGE HEADERS ---------- */
+
+.topbar h1,
+.dashboard-welcome h1 {
+  color: #f5f7e8 !important;
+}
+
+.topbar .subtitle,
+.dashboard-welcome .subtitle {
+  color: #9aa394 !important;
+}
+
+
+/* ---------- DASHBOARD SECTION ---------- */
+
+.main-content .section-heading h2 {
+  color: #f5f7e8 !important;
+}
+
+.main-content .section-heading .eyebrow {
+  color: #a8c85b !important;
+}
+
+
+/* ---------- STAT CARDS ---------- */
+
+.stat-card .stat-top > span {
+  color: #aeb8aa !important;
+}
+
+.stat-card strong {
+  color: #f5f7e8 !important;
+}
+
+.stat-card p {
+  color: #8f998d !important;
+}
+
+
+/* ---------- PROGRESS CARDS ---------- */
+
+.progress-card .progress-card-top {
+  color: #aeb8aa !important;
+}
+
+.progress-card .progress-value strong {
+  color: #f5f7e8 !important;
+}
+
+.progress-card .progress-value span,
+.progress-card p {
+  color: #8f998d !important;
+}
+
+
+/* =========================================================
+   ACTIVITIES WHITE CONTAINER
+   ========================================================= */
+
+.activities-section .section-heading h2 {
+  color: #172033 !important;
+}
+
+.activities-section .section-heading .eyebrow {
+  color: #7d963c !important;
+}
+
+
+/* Activity rows are dark */
+.activities-section .activity-main h3 {
+  color: #f5f7e8 !important;
+}
+
+.activities-section .activity-main p {
+  color: #9aa394 !important;
+}
+
+.activities-section .activity-metrics span {
+  color: #7f897d !important;
+}
+
+.activities-section .activity-metrics strong {
+  color: #dce5d8 !important;
+}
+
+
+/* =========================================================
+   PROFILE PAGE
+   ========================================================= */
+
+.profile-header h1 {
+  color: #f5f7e8 !important;
+}
+
+.profile-header .subtitle {
+  color: #9aa394 !important;
+}
+
+/* White profile card = dark text */
+.profile-card h2,
+.profile-card h3 {
+  color: #172033 !important;
+}
+
+.profile-card p {
+  color: #64748b !important;
+}
+
+.profile-card label {
+  color: #344054 !important;
+}
+
+
+/* =========================================================
+   SETTINGS PAGE
+   ========================================================= */
+
+.settings-header h1 {
+  color: #f5f7e8 !important;
+}
+
+.settings-header .subtitle {
+  color: #9aa394 !important;
+}
+
+/* White settings cards = dark text */
+.settings-card h2,
+.settings-card h3 {
+  color: #172033 !important;
+}
+
+.settings-card p {
+  color: #64748b !important;
+}
+
+.settings-card label {
+  color: #344054 !important;
+}
+
+
+/* =========================================================
+   ANALYTICS PAGE
+   ========================================================= */
+
+.analytics-header h1 {
+  color: #f5f7e8 !important;
+}
+
+.analytics-header .subtitle {
+  color: #9aa394 !important;
+}
+
+/* Analytics cards */
+.analytics-card h2,
+.analytics-card h3,
+.analytics-stat-card h2,
+.analytics-stat-card h3 {
+  color: #172033 !important;
+}
+
+.analytics-card p,
+.analytics-stat-card p {
+  color: #64748b !important;
+}
+
+
+/* =========================================================
+   FORM INPUTS
+   ========================================================= */
+
+.profile-card input,
+.profile-card select,
+.profile-card textarea,
+.settings-card input,
+.settings-card select,
+.settings-card textarea {
+  color: #172033 !important;
+  background: #ffffff !important;
+}
+
+.profile-card input::placeholder,
+.profile-card textarea::placeholder,
+.settings-card input::placeholder,
+.settings-card textarea::placeholder {
+  color: #98a2b3 !important;
+}
+/* =========================================================
+   FITTRACK DARK MODE - COMPLETE TEXT VISIBILITY FIX
+   ========================================================= */
+
+body.dark-mode {
+  background: #080908;
+  color: #f5f7e8;
+}
+
+body.dark-mode .main-content {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 9, 8, 0.96) 0%,
+      rgba(8, 9, 8, 0.90) 45%,
+      rgba(8, 9, 8, 0.95) 100%
+    ),
+    url("/fitness-background.jpg") center / cover fixed no-repeat;
+
+  color: #f5f7e8;
+}
+
+
+/* =========================================================
+   ALL DARK PAGE HEADERS
+   ========================================================= */
+
+body.dark-mode .topbar h1,
+body.dark-mode .dashboard-welcome h1,
+body.dark-mode .profile-header h1,
+body.dark-mode .analytics-header h1,
+body.dark-mode .settings-header h1 {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .topbar .subtitle,
+body.dark-mode .dashboard-welcome .subtitle,
+body.dark-mode .profile-header .subtitle,
+body.dark-mode .analytics-header .subtitle,
+body.dark-mode .settings-header .subtitle {
+  color: #9aa394 !important;
+}
+
+body.dark-mode .eyebrow {
+  color: #a8c85b !important;
+}
+
+
+/* =========================================================
+   DARK MODE CARDS
+   ========================================================= */
+
+body.dark-mode .stat-card,
+body.dark-mode .progress-card,
+body.dark-mode .analytics-stat-card,
+body.dark-mode .analytics-card,
+body.dark-mode .settings-card,
+body.dark-mode .insight-card,
+body.dark-mode .profile-card {
+  background: rgba(18, 21, 18, 0.92) !important;
+  border-color: rgba(201, 255, 56, 0.12) !important;
+
+  color: #f5f7e8;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+/* Vikas Pradhan */
+body.dark-mode .profile-card h2,
+body.dark-mode .profile-card h3,
+body.dark-mode .profile-card strong {
+  color: #f5f7e8 !important;
+}
+
+/* Email / descriptions */
+body.dark-mode .profile-card p {
+  color: #9aa394 !important;
+}
+
+/* Labels */
+body.dark-mode .profile-card label {
+  color: #cbd5c0 !important;
+}
+
+/* Input */
+body.dark-mode .profile-card input,
+body.dark-mode .profile-card select,
+body.dark-mode .profile-card textarea {
+  background: #101510 !important;
+  border-color: #303a30 !important;
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .profile-card input::placeholder,
+body.dark-mode .profile-card textarea::placeholder {
+  color: #6f796d !important;
+}
+
+
+/* =========================================================
+   ANALYTICS
+   ========================================================= */
+
+body.dark-mode .analytics-card-header h2,
+body.dark-mode .analytics-stat-card h2,
+body.dark-mode .analytics-card h2,
+body.dark-mode .history-info h3,
+body.dark-mode .history-value strong {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .analytics-card-header p:not(.eyebrow),
+body.dark-mode .analytics-stat-card p,
+body.dark-mode .history-info p,
+body.dark-mode .history-value span {
+  color: #9aa394 !important;
+}
+
+
+/* Workout Breakdown / chart headings */
+body.dark-mode .analytics-card-header h2 {
+  color: #f5f7e8 !important;
+}
+
+/* Chart labels */
+body.dark-mode .analytics-card text {
+  fill: #cbd5c0 !important;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+body.dark-mode .settings-section-title h2,
+body.dark-mode .setting-info h3 {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .settings-section-title p,
+body.dark-mode .setting-info p {
+  color: #9aa394 !important;
+}
+
+body.dark-mode .setting-row {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .setting-row span,
+body.dark-mode .setting-row p {
+  color: #9aa394 !important;
+}
+
+
+/* Account / Security / Preferences headings */
+body.dark-mode .settings-card h2,
+body.dark-mode .settings-card h3 {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .settings-card p {
+  color: #9aa394 !important;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+body.dark-mode .stat-card .stat-top > span {
+  color: #aeb8aa !important;
+}
+
+body.dark-mode .stat-card strong {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .stat-card p {
+  color: #8f998d !important;
+}
+
+body.dark-mode .progress-card .progress-value strong {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .progress-card .progress-value span,
+body.dark-mode .progress-card p {
+  color: #8f998d !important;
+}
+
+
+/* =========================================================
+   ACTIVITIES
+   ========================================================= */
+
+body.dark-mode .activities-section {
+  background: rgba(18, 21, 18, 0.92) !important;
+}
+
+body.dark-mode .activities-section .section-heading h2 {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .activities-section .section-heading .eyebrow {
+  color: #a8c85b !important;
+}
+
+body.dark-mode .activity-row {
+  background: #20251f !important;
+  border-color: rgba(201, 255, 56, 0.12) !important;
+}
+
+body.dark-mode .activity-main h3 {
+  color: #f5f7e8 !important;
+}
+
+body.dark-mode .activity-main p {
+  color: #9aa394 !important;
+}
+
+body.dark-mode .activity-metrics span {
+  color: #7f897d !important;
+}
+
+body.dark-mode .activity-metrics strong {
+  color: #dce5d8 !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+body.dark-mode .primary-button {
+  background: #c9ff38 !important;
+  color: #080908 !important;
+}
+
+body.dark-mode .primary-button:hover {
+  background: #d7ff70 !important;
+}
+
+
+/* =========================================================
+   FORM LABELS
+   ========================================================= */
+
+body.dark-mode label {
+  color: #cbd5c0;
+}
+
+
+/* =========================================================
+   LINKS / MUTED TEXT
+   ========================================================= */
+
+body.dark-mode a {
+  color: #c9ff38;
+}
+
+body.dark-mode small {
+  color: #8f998d;
+}
+
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+body.dark-mode hr,
+body.dark-mode .divider {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+/* =========================================================
+   ANALYTICS - WORKOUT BREAKDOWN VISIBILITY
+========================================================= */
+
+/* SVG chart labels must be dark on the white analytics card */
+.analytics-card text {
+  fill: #172033 !important;
+}
+
+/* Workout names */
+.analytics-card text.recharts-layer {
+  fill: #172033 !important;
+}
+
+/* Dark mode: chart labels become light */
+body.dark-mode .analytics-card text {
+  fill: #f5f7e8 !important;
+}
+/* =========================================================
+   ANALYTICS - WORKOUT BREAKDOWN
+   Light mode visibility
+========================================================= */
+
+.workout-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.breakdown-row {
+  display: grid;
+  grid-template-columns: 1fr 45px;
+  align-items: center;
+  gap: 20px;
+}
+
+.breakdown-row > div {
+  min-width: 0;
+}
+
+.breakdown-name {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #172033 !important;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.breakdown-row strong {
+  color: #172033 !important;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  text-align: right;
+}
+
+.breakdown-bar {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e5e7eb;
+}
+
+.breakdown-bar > span {
+  display: block;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #7c3aed;
+
+  transition: width 0.3s ease;
+}
+
+
+/* Dark mode */
+body.dark-mode .breakdown-name {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .breakdown-row strong {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .breakdown-bar {
+  background: #263449;
+}
+/* =========================================================
+   ANALYTICS INSIGHT ICONS - LIGHT MODE FIX
+   ========================================================= */
+
+body:not(.dark-mode) .insight-icon {
+  background: #f5f3ff !important;
+  color: #7c3aed !important;
+}
+
+body:not(.dark-mode) .insight-icon svg {
+  color: #7c3aed !important;
+  stroke: #7c3aed !important;
+}
+
+
+/* Dark mode */
+body.dark-mode .insight-icon {
+  background: #243148 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .insight-icon svg {
+  color: #cbd5e1 !important;
+  stroke: #cbd5e1 !important;
+}
+/* =========================================================
+   ACTIVITIES PAGE - LIGHT MODE TEXT FIX
+   ========================================================= */
+
+/* My Activities */
+/* My Activities - Light Mode */
+body:not(.dark-mode) .activities-page-header h1 {
+  color: #ffffff !important;
+}
+
+/* ACTIVITY HISTORY */
+body:not(.dark-mode) .activity-history-header .eyebrow {
+  color: #7c3aed !important;
+}
+
+/* Your Workouts */
+body:not(.dark-mode) .activity-history-header h2 {
+  color: #151922 !important;
+}
+
+/* Workout title */
+body:not(.dark-mode) .activity-management-title {
+  color: #151922 !important;
+}
+
+/* Date */
+body:not(.dark-mode) .activity-management-date {
+  color: #7b8494 !important;
+}
+
+/* Duration / Calories labels */
+body:not(.dark-mode) .management-metric span {
+  color: #7b8494 !important;
+}
+
+/* Duration / Calories values */
+body:not(.dark-mode) .management-metric strong {
+  color: #151922 !important;
+}
+
+/* Edit */
+body:not(.dark-mode) .activity-management-actions .edit-button {
+  color: #7c3aed !important;
+}
+
+/* Delete */
+body:not(.dark-mode) .activity-management-actions .delete-button {
+  color: #dc2626 !important;
+}
+/* =========================================================
+   ACTIVITY HISTORY - VISIBILITY FIX
+   ========================================================= */
+
+
+/* =========================================================
+   ACTIVITY HISTORY LABEL - LIGHT MODE
+   ========================================================= */
+
+body:not(.dark-mode) .activity-history-card .section-eyebrow {
+  color: #7c3aed !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+body.dark-mode .activity-history-card .section-eyebrow {
+  color: #7c3aed !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+/* =========================================================
+   FITTRACK DASHBOARD LOADER
+   ========================================================= */
+
+.fittrack-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #080908;
+  color: #f5f7e8;
+}
+
+.loader-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+
+  border: 3px solid rgba(201, 255, 56, 0.12);
+  border-top-color: #c9ff38;
+  border-right-color: rgba(201, 255, 56, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fittrackSpin 1s linear infinite;
+}
+
+.loader-logo {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  animation: fittrackCounterSpin 1s linear infinite;
+}
+
+.loader-logo span {
+  width: 6px;
+  height: 22px;
+  border-radius: 3px;
+  background: #c9ff38;
+}
+
+.loader-logo span:nth-child(1) {
+  height: 14px;
+  opacity: 0.65;
+}
+
+.loader-logo span:nth-child(2) {
+  height: 25px;
+}
+
+.loader-logo span:nth-child(3) {
+  height: 18px;
+  opacity: 0.8;
+}
+
+.loader-text {
+  margin-top: 24px;
+
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 4px;
+
+  color: #f5f7e8;
+}
+
+.loader-subtext {
+  margin-top: 8px;
+
+  font-size: 12px;
+  color: #8f988b;
+  letter-spacing: 0.5px;
+}
+
+@keyframes fittrackSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fittrackCounterSpin {
+  to {
+    transform: rotate(-360deg);
+  }
+}

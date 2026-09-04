@@ -1,0 +1,3214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+.landing-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page h4,
+.landing-page h5,
+.landing-page h6,
+.landing-page .landing-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+}
+/* =========================================================
+   FITTRACK LANDING PAGE
+   Premium Fitness Landing UI
+========================================================= */
+
+:root {
+  --landing-bg: #080908;
+  --landing-bg-soft: #0d100d;
+  --landing-text: #f5f7e8;
+  --landing-muted: rgba(245, 247, 232, 0.62);
+  --landing-muted-2: rgba(245, 247, 232, 0.42);
+  --landing-lime: #c9ff38;
+  --landing-lime-soft: rgba(201, 255, 56, 0.12);
+  --landing-border: rgba(255, 255, 255, 0.09);
+  --landing-glass: rgba(16, 20, 17, 0.72);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.landing-page {
+  position: relative;
+
+  width: 100%;
+  min-width: 320px;
+  min-height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  background: var(--landing-bg);
+  color: var(--landing-text);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.landing-background {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  z-index: -5;
+
+  background-image:
+    url("/fitness-background.jpg");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.01);
+}
+
+
+/* Dark overlays */
+
+.landing-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 73% 47%,
+      rgba(140, 255, 45, 0.16),
+      transparent 29%
+    ),
+
+    radial-gradient(
+      circle at 45% 50%,
+      rgba(52, 70, 40, 0.10),
+      transparent 38%
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(3, 5, 4, 0.96) 0%,
+      rgba(3, 5, 4, 0.82) 30%,
+      rgba(3, 5, 4, 0.55) 58%,
+      rgba(3, 5, 4, 0.60) 100%
+    ),
+
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(0, 0, 0, 0.08) 42%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+
+/* Glow effects */
+
+.landing-glow {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: rgba(201, 255, 56, 0.07);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+.landing-glow-one {
+  top: 15%;
+  right: 13%;
+}
+
+.landing-glow-two {
+  bottom: 5%;
+  left: 20%;
+
+  opacity: 0.35;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.landing-navbar {
+  position: relative;
+
+  z-index: 50;
+
+  width: min(1500px, calc(100% - 72px));
+
+  margin: 0 auto;
+
+  padding: 27px 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.landing-logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+
+.landing-logo-mark {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  transform: skewX(-12deg);
+}
+
+
+.landing-logo-mark span {
+  display: block;
+
+  width: 6px;
+
+  border-radius: 4px;
+
+  background: var(--landing-lime);
+
+  box-shadow:
+    0 0 15px rgba(201, 255, 56, 0.35);
+}
+
+
+.landing-logo-mark span:nth-child(1) {
+  height: 12px;
+}
+
+
+.landing-logo-mark span:nth-child(2) {
+  height: 21px;
+}
+
+
+.landing-logo-mark span:nth-child(3) {
+  height: 29px;
+}
+
+
+.landing-logo-text {
+  font-size: 22px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.8px;
+
+  color: #ffffff;
+}
+
+
+.landing-logo-text span {
+  color: var(--landing-lime);
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.landing-nav {
+  display: flex;
+
+  align-items: center;
+
+  gap: 44px;
+}
+
+
+.landing-nav a {
+  position: relative;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.landing-nav a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -9px;
+
+  width: 0;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background: var(--landing-lime);
+
+  transform: translateX(-50%);
+
+  transition: width 0.25s ease;
+}
+
+
+.landing-nav a:hover {
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+
+.landing-nav a:hover::after {
+  width: 20px;
+}
+
+
+/* =========================================================
+   NAV ACTIONS
+========================================================= */
+
+.landing-nav-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+.landing-signin {
+  border: 0;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  padding: 12px 17px;
+
+  font-size: 14px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.landing-signin:hover {
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+
+.landing-get-started {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  min-height: 44px;
+
+  padding: 0 21px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(201, 255, 56, 0.35);
+
+  background: rgba(201, 255, 56, 0.08);
+
+  color: var(--landing-lime);
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 0 20px rgba(201, 255, 56, 0.025);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.landing-get-started:hover {
+  background: rgba(201, 255, 56, 0.14);
+
+  border-color: rgba(201, 255, 56, 0.55);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.24),
+    0 0 20px rgba(201, 255, 56, 0.08);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.landing-hero {
+  position: relative;
+
+  z-index: 5;
+
+  width: min(1500px, calc(100% - 72px));
+
+  min-height: calc(100dvh - 100px);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 46% 54%;
+
+  align-items: center;
+
+  padding-bottom: 80px;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.landing-content {
+  position: relative;
+
+  z-index: 15;
+
+  max-width: 650px;
+
+  padding-top: 15px;
+
+  animation:
+    landingContentIn 0.8s ease-out both;
+}
+
+
+@keyframes landingContentIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.landing-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--landing-lime);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+.eyebrow-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--landing-lime);
+
+  box-shadow:
+    0 0 0 5px rgba(201, 255, 56, 0.08),
+    0 0 15px rgba(201, 255, 56, 0.7);
+
+  animation:
+    eyebrowPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes eyebrowPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.landing-content h1 {
+  margin: 27px 0 25px;
+
+  max-width: 670px;
+
+  font-size:
+    clamp(58px, 6.3vw, 96px);
+
+  line-height: 0.91;
+
+  letter-spacing: -5px;
+
+  font-weight: 850;
+
+  color: var(--landing-text);
+}
+
+
+.landing-content h1 span {
+  color: var(--landing-lime);
+
+  text-shadow:
+    0 0 30px rgba(201, 255, 56, 0.08);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.landing-description {
+  max-width: 570px;
+
+  margin: 0 0 32px;
+
+  color: var(--landing-muted);
+
+  font-size: 16px;
+
+  line-height: 1.72;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.landing-cta-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+.primary-cta {
+  min-height: 58px;
+
+  padding: 0 25px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 11px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: var(--landing-lime);
+
+  color: #10130b;
+
+  font-size: 14px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.30),
+    0 0 30px rgba(201, 255, 56, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.primary-cta:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 17px 42px rgba(0, 0, 0, 0.38),
+    0 0 35px rgba(201, 255, 56, 0.15);
+}
+
+
+.primary-cta svg {
+  transition:
+    transform 0.25s ease;
+}
+
+
+.primary-cta:hover svg {
+  transform:
+    translate(2px, -2px);
+}
+
+
+/* Secondary CTA */
+
+.secondary-cta {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 14px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.secondary-cta:hover {
+  color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+.play-icon {
+  width: 37px;
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  background: rgba(255, 255, 255, 0.06);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.secondary-cta:hover .play-icon {
+  background: rgba(201, 255, 56, 0.10);
+
+  border-color:
+    rgba(201, 255, 56, 0.35);
+}
+
+
+/* =========================================================
+   SOCIAL PROOF
+========================================================= */
+
+.landing-proof {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 35px;
+}
+
+
+.landing-avatar-stack {
+  display: flex;
+
+  align-items: center;
+}
+
+
+.landing-avatar {
+  width: 35px;
+  height: 35px;
+
+  flex: 0 0 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.72);
+
+  color: #111;
+
+  font-size: 11px;
+
+  font-weight: 850;
+
+  margin-left: -8px;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+
+.landing-avatar:first-child {
+  margin-left: 0;
+}
+
+
+.landing-avatar-one {
+  background: #d8f36a;
+}
+
+
+.landing-avatar-two {
+  background: #ffffff;
+}
+
+
+.landing-avatar-three {
+  background: #c6d5a0;
+}
+
+
+.landing-avatar-four {
+  background: #8f9a73;
+}
+
+
+.proof-text {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.proof-text strong {
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+.proof-text span {
+  color: var(--landing-muted-2);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RIGHT VISUAL
+========================================================= */
+
+.landing-visual {
+  position: relative;
+
+  height: 700px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+}
+
+
+/* =========================================================
+   ATHLETE
+========================================================= */
+
+.athlete-container {
+  position: relative;
+
+  width: min(650px, 100%);
+
+  height: 720px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+}
+
+
+.athlete-glow {
+  position: absolute;
+
+  left: 50%;
+  bottom: 5%;
+
+  width: 390px;
+  height: 390px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(144, 255, 38, 0.10);
+
+  filter: blur(90px);
+
+  transform:
+    translateX(-50%);
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+.athlete-image {
+  position: relative;
+
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  object-position: center bottom;
+
+  filter:
+    contrast(1.08)
+    brightness(0.88)
+    saturate(0.95);
+
+  transform:
+    translateY(18px);
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 7%,
+      black 88%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 7%,
+      black 88%,
+      transparent 100%
+    );
+}
+
+
+/* =========================================================
+   FLOATING CARDS
+========================================================= */
+
+.floating-card,
+.floating-progress {
+  position: absolute;
+
+  z-index: 10;
+
+  background:
+    rgba(18, 22, 19, 0.72);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+/* =========================================================
+   STANDARD FLOATING CARD
+========================================================= */
+
+.floating-card {
+  min-width: 165px;
+
+  padding: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 17px;
+}
+
+
+.floating-icon {
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 13px;
+
+  color: var(--landing-lime);
+
+  background:
+    rgba(201, 255, 56, 0.11);
+
+  border:
+    1px solid rgba(201, 255, 56, 0.15);
+}
+
+
+.floating-card-content {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
+.floating-card-content span {
+  color: rgba(255, 255, 255, 0.46);
+
+  font-size: 9px;
+
+  font-weight: 750;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+}
+
+
+.floating-card-content strong {
+  color: #ffffff;
+
+  font-size: 20px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+
+.floating-card-content small {
+  color: rgba(255, 255, 255, 0.38);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   CARD POSITIONS
+========================================================= */
+
+.calories-card {
+  top: 150px;
+
+  left: 0;
+
+  transform:
+    rotate(-6deg);
+
+  animation:
+    landingFloatOne 5s ease-in-out infinite;
+}
+
+
+.workout-card {
+  top: 285px;
+
+  right: 0;
+
+  transform:
+    rotate(5deg);
+
+  animation:
+    landingFloatTwo 5.5s ease-in-out infinite;
+}
+
+
+.ai-card {
+  bottom: 125px;
+
+  left: 65px;
+
+  transform:
+    rotate(-3deg);
+
+  animation:
+    landingFloatThree 6s ease-in-out infinite;
+}
+
+
+.ai-icon {
+  color: var(--landing-lime);
+}
+
+
+/* =========================================================
+   WEEKLY PROGRESS
+========================================================= */
+
+.floating-progress {
+  right: 25px;
+
+  bottom: 78px;
+
+  width: 190px;
+
+  padding: 18px;
+
+  border-radius: 17px;
+}
+
+
+.progress-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+
+.progress-top > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.progress-top span {
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 10px;
+}
+
+
+.progress-top strong {
+  color: #ffffff;
+
+  font-size: 18px;
+
+  font-weight: 800;
+}
+
+
+.progress-top > svg {
+  color: var(--landing-lime);
+}
+
+
+/* Namespaced so App.css cannot conflict */
+
+.landing-progress-line {
+  width: 100%;
+
+  height: 6px;
+
+  margin-top: 15px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  overflow: hidden;
+}
+
+
+.landing-progress-value {
+  width: 82%;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    var(--landing-lime);
+
+  box-shadow:
+    0 0 15px rgba(201, 255, 56, 0.45);
+}
+
+
+.progress-bottom {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 9px;
+}
+
+
+.progress-bottom span {
+  color: rgba(255, 255, 255, 0.32);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   FLOAT ANIMATIONS
+========================================================= */
+
+@keyframes landingFloatOne {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-6deg);
+  }
+
+  50% {
+    transform:
+      translateY(-12px)
+      rotate(-4deg);
+  }
+
+}
+
+
+@keyframes landingFloatTwo {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(5deg);
+  }
+
+  50% {
+    transform:
+      translateY(10px)
+      rotate(7deg);
+  }
+
+}
+
+
+@keyframes landingFloatThree {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-3deg);
+  }
+
+  50% {
+    transform:
+      translateY(-9px)
+      rotate(-1deg);
+  }
+
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.landing-features {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(1200px, calc(100% - 72px));
+
+  margin: 0 auto;
+
+  min-height: 500px;
+
+  padding:
+    100px 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+
+.feature-item {
+  min-height: 250px;
+
+  padding: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.feature-item:hover {
+  transform:
+    translateY(-8px);
+
+  background:
+    rgba(201, 255, 56, 0.055);
+
+  border-color:
+    rgba(201, 255, 56, 0.25);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.22);
+}
+
+
+.feature-number {
+  color:
+    var(--landing-lime);
+
+  font-size: 12px;
+
+  font-weight: 850;
+
+  letter-spacing: 2px;
+}
+
+
+.feature-item strong {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 750;
+}
+
+
+.feature-item span {
+  color:
+    rgba(255, 255, 255, 0.50);
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.landing-about {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(1200px, calc(100% - 72px));
+
+  min-height: 550px;
+
+  margin: 0 auto;
+
+  padding:
+    100px 0;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 0.7fr;
+
+  align-items: center;
+
+  gap: 80px;
+}
+
+
+.about-content {
+  max-width: 620px;
+}
+
+
+.landing-section-label {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  color:
+    var(--landing-lime);
+
+  font-size: 12px;
+
+  font-weight: 850;
+
+  letter-spacing: 2px;
+}
+
+
+.about-content h2 {
+  margin: 0 0 25px;
+
+  font-size:
+    clamp(45px, 5vw, 72px);
+
+  line-height: 0.95;
+
+  letter-spacing: -4px;
+
+  font-weight: 850;
+}
+
+
+.about-content h2 span {
+  color:
+    var(--landing-lime);
+}
+
+
+.about-content p {
+  max-width: 540px;
+
+  margin: 0;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+.about-cta {
+  margin-top: 28px;
+
+  min-height: 50px;
+
+  padding: 0 22px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background:
+    var(--landing-lime);
+
+  color: #11140c;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.about-cta:hover {
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   ABOUT STATS
+========================================================= */
+
+.about-stats {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+.about-stats div {
+  min-height: 80px;
+
+  padding:
+    20px 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.about-stats div:hover {
+  transform:
+    translateX(5px);
+
+  border-color:
+    rgba(201, 255, 56, 0.22);
+}
+
+
+.about-stats strong {
+  color:
+    var(--landing-lime);
+
+  font-size: 28px;
+
+  font-weight: 850;
+}
+
+
+.about-stats span {
+  color:
+    rgba(255, 255, 255, 0.64);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.landing-scroll {
+  position: fixed;
+
+  right: 28px;
+
+  bottom: 30px;
+
+  z-index: 30;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  transform:
+    rotate(90deg)
+    translateX(50%);
+
+  transform-origin:
+    right bottom;
+
+  cursor: pointer;
+}
+
+
+.landing-scroll span {
+  color:
+    rgba(255, 255, 255, 0.34);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  white-space: nowrap;
+}
+
+
+.scroll-line {
+  width: 45px;
+
+  height: 1px;
+
+  background:
+    rgba(201, 255, 56, 0.55);
+}
+
+
+/* =========================================================
+   GLOBAL BUTTON SAFETY
+========================================================= */
+
+.landing-page button {
+  font-family: inherit;
+}
+
+
+.landing-page button:focus-visible,
+.landing-page a:focus-visible {
+  outline:
+    2px solid var(--landing-lime);
+
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1200
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .landing-navbar,
+  .landing-hero {
+    width:
+      calc(100% - 50px);
+  }
+
+
+  .landing-content h1 {
+    font-size:
+      clamp(54px, 6vw, 82px);
+  }
+
+
+  .landing-visual {
+    transform:
+      scale(0.94);
+
+    transform-origin:
+      center center;
+  }
+
+
+  .calories-card {
+    left: -10px;
+  }
+
+
+  .workout-card {
+    right: -5px;
+  }
+
+
+  .floating-progress {
+    right: 5px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1000
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .landing-nav {
+    gap: 25px;
+  }
+
+
+  .landing-hero {
+    grid-template-columns:
+      48% 52%;
+  }
+
+
+  .landing-content h1 {
+    letter-spacing:
+      -4px;
+  }
+
+
+  .landing-description {
+    max-width: 500px;
+  }
+
+
+  .landing-visual {
+    transform:
+      scale(0.88);
+  }
+
+
+  .floating-card {
+    min-width: 150px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 850
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .landing-navbar {
+    width:
+      calc(100% - 36px);
+
+    padding:
+      22px 0;
+  }
+
+
+  .landing-nav {
+    display: none;
+  }
+
+
+  .landing-hero {
+    width:
+      calc(100% - 36px);
+
+    min-height:
+      auto;
+
+    grid-template-columns:
+      1fr;
+
+    padding-top:
+      65px;
+
+    padding-bottom:
+      30px;
+  }
+
+
+  .landing-content {
+    max-width:
+      700px;
+
+    margin:
+      0 auto;
+
+    text-align:
+      center;
+  }
+
+
+  .landing-eyebrow {
+    justify-content:
+      center;
+  }
+
+
+  .landing-content h1 {
+    margin:
+      25px auto;
+
+    font-size:
+      clamp(52px, 10vw, 76px);
+
+    letter-spacing:
+      -4px;
+  }
+
+
+  .landing-description {
+    margin-left:
+      auto;
+
+    margin-right:
+      auto;
+  }
+
+
+  .landing-cta-row {
+    justify-content:
+      center;
+  }
+
+
+  .landing-proof {
+    justify-content:
+      center;
+  }
+
+
+  .landing-visual {
+    height:
+      560px;
+
+    margin-top:
+      20px;
+
+    transform:
+      none;
+  }
+
+
+  .athlete-container {
+    width:
+      min(580px, 100%);
+
+    height:
+      580px;
+  }
+
+
+  .landing-features {
+    width:
+      calc(100% - 36px);
+
+    grid-template-columns:
+      1fr;
+
+    padding:
+      70px 0;
+  }
+
+
+  .landing-about {
+    width:
+      calc(100% - 36px);
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      45px;
+
+    padding:
+      70px 0;
+  }
+
+
+  .about-content {
+    text-align:
+      center;
+
+    margin:
+      0 auto;
+  }
+
+
+  .about-content p {
+    margin:
+      0 auto;
+  }
+
+
+  .about-stats {
+    max-width:
+      600px;
+
+    width:
+      100%;
+
+    margin:
+      0 auto;
+  }
+
+
+  .landing-scroll {
+    display:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 600
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .landing-navbar {
+    width:
+      calc(100% - 28px);
+
+    padding:
+      18px 0;
+  }
+
+
+  .landing-logo-text {
+    font-size:
+      19px;
+  }
+
+
+  .landing-logo-mark {
+    width:
+      26px;
+
+    height:
+      26px;
+  }
+
+
+  .landing-logo-mark span {
+    width:
+      5px;
+  }
+
+
+  .landing-get-started {
+    min-height:
+      40px;
+
+    padding:
+      0 15px;
+
+    font-size:
+      12px;
+  }
+
+
+  .landing-signin {
+    padding:
+      10px 8px;
+
+    font-size:
+      12px;
+  }
+
+
+  .landing-hero {
+    width:
+      calc(100% - 28px);
+
+    padding-top:
+      45px;
+  }
+
+
+  .landing-content h1 {
+    font-size:
+      clamp(44px, 14vw, 64px);
+
+    letter-spacing:
+      -3px;
+
+    line-height:
+      0.94;
+  }
+
+
+  .landing-description {
+    font-size:
+      14px;
+
+    line-height:
+      1.65;
+  }
+
+
+  .landing-cta-row {
+    flex-direction:
+      column;
+
+    gap:
+      14px;
+  }
+
+
+  .primary-cta {
+    width:
+      100%;
+
+    max-width:
+      280px;
+  }
+
+
+  .secondary-cta {
+    min-height:
+      42px;
+  }
+
+
+  .landing-proof {
+    margin-top:
+      27px;
+  }
+
+
+  .landing-visual {
+    height:
+      470px;
+  }
+
+
+  .athlete-container {
+    height:
+      500px;
+  }
+
+
+  .floating-card {
+    min-width:
+      130px;
+
+    padding:
+      11px;
+
+    gap:
+      8px;
+  }
+
+
+  .floating-icon {
+    width:
+      35px;
+
+    height:
+      35px;
+
+    flex-basis:
+      35px;
+
+    border-radius:
+      10px;
+  }
+
+
+  .floating-card-content strong {
+    font-size:
+      16px;
+  }
+
+
+  .floating-card-content small {
+    font-size:
+      8px;
+  }
+
+
+  .calories-card {
+    top:
+      95px;
+
+    left:
+      0;
+  }
+
+
+  .workout-card {
+    top:
+      190px;
+
+    right:
+      0;
+  }
+
+
+  .ai-card {
+    bottom:
+      80px;
+
+    left:
+      0;
+  }
+
+
+  .floating-progress {
+    right:
+      0;
+
+    bottom:
+      55px;
+
+    width:
+      150px;
+
+    padding:
+      13px;
+  }
+
+
+  .landing-features {
+    width:
+      calc(100% - 28px);
+  }
+
+
+  .feature-item {
+    min-height:
+      210px;
+
+    padding:
+      25px;
+  }
+
+
+  .landing-about {
+    width:
+      calc(100% - 28px);
+  }
+
+
+  .about-content h2 {
+    font-size:
+      48px;
+
+    letter-spacing:
+      -3px;
+  }
+
+
+  .about-content p {
+    font-size:
+      14px;
+  }
+
+
+  .about-stats div {
+    padding:
+      17px;
+  }
+
+
+  .about-stats strong {
+    font-size:
+      23px;
+  }
+
+
+  .about-stats span {
+    font-size:
+      12px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 400
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .landing-get-started {
+    padding:
+      0 12px;
+  }
+
+
+  .landing-get-started svg {
+    display:
+      none;
+  }
+
+
+  .landing-content h1 {
+    font-size:
+      43px;
+
+    letter-spacing:
+      -2.5px;
+  }
+
+
+  .landing-eyebrow {
+    font-size:
+      9px;
+
+    letter-spacing:
+      1.3px;
+  }
+
+
+  .landing-visual {
+    height:
+      420px;
+  }
+
+
+  .athlete-container {
+    height:
+      450px;
+  }
+
+
+  .floating-card {
+    transform:
+      scale(0.82);
+  }
+
+
+  .calories-card {
+    left:
+      -20px;
+  }
+
+
+  .workout-card {
+    right:
+      -20px;
+  }
+
+
+  .ai-card {
+    left:
+      -20px;
+  }
+
+
+  .floating-progress {
+    right:
+      -15px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .landing-page *,
+  .landing-page *::before,
+  .landing-page *::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+
+}
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.landing-footer {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+
+  margin-top: 40px;
+
+  padding:
+    85px 40px
+    32px;
+
+  background:
+    rgba(7, 8, 7, 0.96);
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  box-sizing: border-box;
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+/* =========================================================
+   FOOTER MAIN
+========================================================= */
+
+.landing-footer-main {
+  width: min(1500px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    2fr
+    1fr
+    1fr
+    1fr
+    1fr;
+
+  gap: 55px;
+}
+
+
+/* =========================================================
+   FOOTER BRAND
+========================================================= */
+
+.landing-footer-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+
+.footer-logo {
+  cursor: pointer;
+}
+
+
+.footer-tagline {
+  margin: 20px 0 25px;
+
+  color:
+    rgba(245, 247, 232, 0.48);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.footer-socials {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+
+.footer-socials a {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color:
+    rgba(255, 255, 255, 0.60);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.footer-socials a:hover {
+  color:
+    var(--landing-lime);
+
+  background:
+    rgba(201, 255, 56, 0.08);
+
+  border-color:
+    rgba(201, 255, 56, 0.25);
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   FOOTER THEME
+========================================================= */
+
+
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+
+.footer-column h3 {
+  margin: 0 0 25px;
+
+  color:
+    #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+}
+
+
+.footer-column a,
+.footer-column button {
+  width: fit-content;
+
+  margin-bottom: 18px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color:
+    rgba(245, 247, 232, 0.60);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.footer-column a:hover,
+.footer-column button:hover {
+  color:
+    var(--landing-lime);
+
+  transform:
+    translateX(3px);
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.landing-footer-bottom {
+  width: min(1500px, 100%);
+
+  margin:
+    85px auto 0;
+
+  padding-top:
+    30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.09);
+}
+
+
+.footer-copyright {
+  color:
+    rgba(245, 247, 232, 0.58);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   APP BADGES
+========================================================= */
+
+.footer-apps {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.app-store-badge,
+.google-play-badge {
+  min-width: 148px;
+  height: 51px;
+
+  padding:
+    0 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.60);
+
+  border-radius: 8px;
+
+  background:
+    rgba(0, 0, 0, 0.45);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.app-store-badge:hover,
+.google-play-badge:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(201, 255, 56, 0.55);
+
+  background:
+    rgba(201, 255, 56, 0.04);
+}
+
+
+.app-badge-icon {
+  font-size: 27px;
+
+  line-height: 1;
+}
+
+
+.play-badge-icon {
+  font-size: 22px;
+
+  color:
+    #ffffff;
+}
+
+
+.app-badge-text {
+  display: flex;
+
+  flex-direction: column;
+
+  line-height: 1;
+}
+
+
+.app-badge-text small {
+  margin-bottom: 4px;
+
+  color:
+    rgba(255, 255, 255, 0.80);
+
+  font-size: 8px;
+
+  font-weight: 500;
+}
+
+
+.app-badge-text strong {
+  color:
+    #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: -0.4px;
+}
+
+
+/* =========================================================
+   FOOTER RESPONSIVE - 1000
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .landing-footer-main {
+    grid-template-columns:
+      1.5fr 1fr 1fr 1fr;
+
+    gap: 40px;
+  }
+
+
+  .landing-footer-brand {
+    grid-column:
+      span 4;
+  }
+
+}
+
+
+/* =========================================================
+   FOOTER RESPONSIVE - 700
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .landing-footer {
+    padding:
+      65px 28px
+      28px;
+  }
+
+
+  .landing-footer-main {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap:
+      45px 30px;
+  }
+
+
+  .landing-footer-brand {
+    grid-column:
+      span 2;
+  }
+
+
+  .landing-footer-bottom {
+    margin-top:
+      60px;
+
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+  }
+
+
+  .footer-apps {
+    width: 100%;
+  }
+
+
+  .app-store-badge,
+  .google-play-badge {
+    flex: 1;
+
+    min-width: 0;
+  }
+
+}
+
+
+/* =========================================================
+   FOOTER RESPONSIVE - 450
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .landing-footer {
+    padding:
+      55px 20px
+      25px;
+  }
+
+
+  .landing-footer-main {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      38px;
+  }
+
+
+  .landing-footer-brand {
+    grid-column:
+      span 1;
+  }
+
+
+  .footer-column h3 {
+    margin-bottom:
+      20px;
+  }
+
+
+  .footer-column a,
+  .footer-column button {
+    margin-bottom:
+      14px;
+
+    font-size:
+      13px;
+  }
+
+
+  .landing-footer-bottom {
+    gap:
+      25px;
+  }
+
+
+  .footer-apps {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .app-store-badge,
+  .google-play-badge {
+    width:
+      100%;
+
+    flex:
+      none;
+
+    justify-content:
+      center;
+  }
+
+}
+/* =====================================================
+   FEATURE BACKGROUND IMAGES
+===================================================== */
+
+.feature-item {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Track image */
+
+.feature-track {
+  background-image: url("/track.jpg")!important;
+}
+
+/* Progress image */
+
+.feature-progress {
+  background-image: url("/progress.jpg")!important;
+}
+
+/* AI image */
+
+.feature-ai {
+  background-image: url("/Ai.png")!important;
+}
+
+
+/* Dark overlay */
+
+.feature-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 9, 8, 0.90),
+    rgba(8, 9, 8, 0.55)
+  );
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+/* Keep content above image */
+
+.feature-item > *:not(.feature-overlay) {
+  position: relative;
+  z-index: 1;
+}
+/* =====================================================
+   PREMIUM ABOUT SECTION
+===================================================== */
+
+.landing-about {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+
+  min-height: 650px;
+  padding: 110px 8%;
+
+  overflow: hidden;
+}
+
+
+/* BACKGROUND GLOW */
+
+.about-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  right: -180px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(201, 255, 56, 0.08);
+
+  filter: blur(100px);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* LEFT CONTENT */
+
+.about-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+}
+
+
+.about-content h2 {
+  margin: 18px 0 24px;
+
+  font-size: clamp(48px, 5vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -3px;
+}
+
+
+.about-content h2 span {
+  color: #c9ff38;
+}
+
+
+.about-content p {
+  max-width: 470px;
+
+  color: #9aa394;
+
+  font-size: 17px;
+  line-height: 1.8;
+
+  margin-bottom: 32px;
+}
+
+
+/* CTA */
+
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 22px;
+
+  border: 1px solid rgba(201, 255, 56, 0.35);
+  border-radius: 8px;
+
+  background: #c9ff38;
+  color: #080908;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.about-cta:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 35px rgba(201, 255, 56, 0.18);
+}
+
+
+/* =====================================================
+   ABOUT FEATURE CARDS
+===================================================== */
+
+.about-features {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+.about-feature-card {
+  position: relative;
+
+  min-height: 290px;
+
+  padding: 28px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
+}
+
+
+.about-feature-card:hover {
+  transform: translateY(-10px);
+
+  border-color: rgba(201, 255, 56, 0.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(201, 255, 56, 0.10),
+      rgba(255, 255, 255, 0.025)
+    );
+}
+
+
+/* TOP */
+
+.about-feature-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #c9ff38;
+}
+
+
+.about-feature-number {
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+/* LINE */
+
+.about-feature-line {
+  width: 35px;
+  height: 2px;
+
+  margin: 35px 0 28px;
+
+  background: #c9ff38;
+
+  transition: width 0.3s ease;
+}
+
+
+.about-feature-card:hover .about-feature-line {
+  width: 70px;
+}
+
+
+/* TITLE */
+
+.about-feature-card h3 {
+  margin: 0 0 14px;
+
+  font-size: 20px;
+  color: #f5f7e8;
+}
+
+
+/* DESCRIPTION */
+
+.about-feature-card p {
+  margin: 0;
+
+  color: #8f988b;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+.light-mode .about-feature-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+
+.light-mode .about-feature-card h3 {
+  color: #111;
+}
+
+
+.light-mode .about-feature-card p {
+  color: #66705f;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .landing-about {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .about-content {
+    max-width: 700px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .landing-about {
+    padding: 80px 6%;
+  }
+
+  .about-content h2 {
+    font-size: 48px;
+    letter-spacing: -2px;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+
+  .about-feature-card {
+    min-height: auto;
+  }
+
+}
+/* SOCIAL IMAGE ICONS */
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-socials a img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+
+/* APP STORE / GOOGLE PLAY */
+
+.footer-apps {
+  display: flex;
+  gap: 12px;
+}
+
+.app-store-badge,
+.google-play-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 150px;
+  padding: 9px 13px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.app-store-badge img,
+.google-play-badge img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.coming-soon-badge {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.coming-soon-badge span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #c9ff38;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* =====================================================
+   SOCIAL IMAGE ICONS
+===================================================== */
+
+.footer-socials a img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+
+/* =====================================================
+   APP DOWNLOAD CARDS
+===================================================== */
+
+.footer-apps {
+  display: flex;
+  gap: 14px;
+}
+
+.app-download-card {
+  width: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* IMAGE BOX */
+
+.app-image-box {
+  width: 110px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  overflow: hidden;
+}
+
+
+.app-image-box img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+/* COMING SOON */
+
+.app-download-card span {
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #c9ff38;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+
+  text-align: center;
+}
