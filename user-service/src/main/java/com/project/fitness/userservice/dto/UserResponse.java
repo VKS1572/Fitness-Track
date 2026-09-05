@@ -10,7 +10,9 @@ public record UserResponse(
         String email,
         String firstName,
         String lastName,
+        String profileImage,
         UserRole role,
+
         LocalDateTime createdAt
 ) {
 
@@ -20,6 +22,7 @@ public record UserResponse(
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getProfileImage(),
                 user.getRole(),
                 user.getCreatedAt()
         );

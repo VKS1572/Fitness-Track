@@ -2,9 +2,6 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:8080",
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 api.interceptors.request.use(
@@ -14,6 +11,11 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // IMPORTANT:
+    // Do NOT set Content-Type here.
+    // Axios/browser will automatically set
+    // multipart/form-data with boundary for FormData.
 
     return config;
   },

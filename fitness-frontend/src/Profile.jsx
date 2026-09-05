@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "./api/axios";
 
 function Profile({ user, onUserUpdated }) {
@@ -15,6 +15,58 @@ function Profile({ user, onUserUpdated }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  // =========================
+  // PROFILE IMAGE
+  // =========================
+
+  const [profileImage, setProfileImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [imageError, setImageError] = useState("");
+
+  // =========================
+  // LOAD PROFILE IMAGE
+  // =========================
+
+  useEffect(() => {
+    let objectUrl;
+
+    const loadProfileImage = async () => {
+      if (!user?.profileImage || !user?.id) {
+        setImagePreview(null);
+        return;
+      }
+
+      try {
+        const response = await api.get(
+          `/api/users/${user.id}/profile-image`,
+          {
+            responseType: "blob",
+          }
+        );
+
+        objectUrl = URL.createObjectURL(response.data);
+
+        setImagePreview(objectUrl);
+      } catch (err) {
+        console.error(
+          "Profile image load error:",
+          err
+        );
+
+        setImagePreview(null);
+      }
+    };
+
+    loadProfileImage();
+
+    return () => {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
+  }, [user?.id, user?.profileImage]);
 
   // =========================
   // PASSWORD FORM
@@ -39,6 +91,161 @@ function Profile({ user, onUserUpdated }) {
       ...form,
       [e.target.name]: e.target.value,
     });
+  };
+
+  // =========================
+  // PROFILE IMAGE CHANGE
+  // =========================
+
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setImageError("");
+
+    // Check image type
+    if (!file.type.startsWith("image/")) {
+      setImageError(
+        "Please select a valid image file."
+      );
+      return;
+    }
+
+    // Maximum 5 MB
+    if (file.size > 5 * 1024 * 1024) {
+      setImageError(
+        "Image size must be less than 5 MB."
+      );
+      return;
+    }
+
+    setProfileImage(file);
+
+    // Preview selected image
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl);
+  };
+
+  // =========================
+  // UPLOAD PROFILE IMAGE
+  // =========================
+
+  const handleProfileImageUpload = async () => {
+    if (!profileImage) {
+      return;
+    }
+
+    setImageLoading(true);
+    setImageError("");
+    setMessage("");
+
+    try {
+      const formData = new FormData();
+
+      formData.append("file", profileImage);
+
+      const response = await api.post(
+        `/api/users/${user.id}/profile-image`,
+        formData
+      );
+
+      const updatedUser = response.data;
+
+      // Update local storage
+      localStorage.setItem(
+        "user",
+        JSON.stringify(updatedUser)
+      );
+
+      // Update App.jsx
+      onUserUpdated?.(updatedUser);
+
+      // Clear selected file
+      setProfileImage(null);
+
+      setMessage(
+        "Profile photo updated successfully."
+      );
+
+    } catch (err) {
+      console.error(
+        "Profile image upload error:",
+        err
+      );
+
+      if (err.response?.status === 401) {
+        setImageError(
+          "Session expired. Please login again."
+        );
+      } else {
+        setImageError(
+          err.response?.data?.message ||
+          err.response?.data ||
+          "Unable to upload profile photo."
+        );
+      }
+
+    } finally {
+      setImageLoading(false);
+    }
+  };
+
+  // =========================
+  // REMOVE PROFILE IMAGE
+  // =========================
+
+  const handleRemoveProfileImage = async () => {
+    setImageLoading(true);
+    setImageError("");
+    setMessage("");
+
+    try {
+      const response = await api.delete(
+        `/api/users/${user.id}/profile-image`
+      );
+
+      const updatedUser = response.data;
+
+      // Update local storage
+      localStorage.setItem(
+        "user",
+        JSON.stringify(updatedUser)
+      );
+
+      // Update App.jsx
+      onUserUpdated?.(updatedUser);
+
+      setProfileImage(null);
+      setImagePreview(null);
+
+      setMessage(
+        "Profile photo removed successfully."
+      );
+
+    } catch (err) {
+      console.error(
+        "Profile image remove error:",
+        err
+      );
+
+      if (err.response?.status === 401) {
+        setImageError(
+          "Session expired. Please login again."
+        );
+      } else {
+        setImageError(
+          err.response?.data?.message ||
+          err.response?.data ||
+          "Unable to remove profile photo."
+        );
+      }
+
+    } finally {
+      setImageLoading(false);
+    }
   };
 
   // =========================
@@ -69,13 +276,20 @@ function Profile({ user, onUserUpdated }) {
       // Update user in App.jsx
       onUserUpdated?.(updatedUser);
 
-      setMessage("Profile updated successfully.");
+      setMessage(
+        "Profile updated successfully."
+      );
 
     } catch (err) {
-      console.error("Profile update error:", err);
+      console.error(
+        "Profile update error:",
+        err
+      );
 
       if (err.response?.status === 401) {
-        setError("Session expired. Please login again.");
+        setError(
+          "Session expired. Please login again."
+        );
       } else {
         setError(
           err.response?.data?.message ||
@@ -220,13 +434,68 @@ function Profile({ user, onUserUpdated }) {
 
         <div className="profile-user">
 
-          <div className="profile-avatar">
+          <div className="profile-avatar-wrapper">
 
-            {form.firstName
-              ? form.firstName
-                  .charAt(0)
-                  .toUpperCase()
-              : "U"}
+            <div className="profile-avatar">
+
+              {imagePreview ? (
+                <img
+                  src={imagePreview}
+                  alt={`${form.firstName} ${form.lastName}`}
+                />
+              ) : (
+                <span>
+                  {form.firstName?.charAt(0)?.toUpperCase() || "U"}
+                  {form.lastName?.charAt(0)?.toUpperCase() || ""}
+                </span>
+              )}
+
+            </div>
+
+            <input
+              type="file"
+              id="profile-image-input"
+              accept="image/*"
+              onChange={handleProfileImageChange}
+              hidden
+            />
+
+            <label
+              htmlFor="profile-image-input"
+              className="secondary-button"
+            >
+              Change Profile Photo
+            </label>
+
+            {profileImage && (
+              <button
+                type="button"
+                className="primary-button"
+                onClick={handleProfileImageUpload}
+                disabled={imageLoading}
+              >
+                {imageLoading
+                  ? "Uploading..."
+                  : "Upload Photo"}
+              </button>
+            )}
+
+            {imagePreview && (
+              <button
+                type="button"
+                className="danger-button"
+                onClick={handleRemoveProfileImage}
+                disabled={imageLoading}
+              >
+                Remove Photo
+              </button>
+            )}
+
+            {imageError && (
+              <div className="profile-error">
+                {imageError}
+              </div>
+            )}
 
           </div>
 

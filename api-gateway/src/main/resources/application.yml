@@ -69,3 +69,7 @@ management:
 
 jwt:
   secret: fitness-app-secret-key-for-jwt-token-generation-2026
+  logging:
+    level:
+      org.springframework.security: DEBUG
+      org.springframework.cloud.gateway: DEBUG

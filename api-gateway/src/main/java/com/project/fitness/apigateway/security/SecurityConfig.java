@@ -14,7 +14,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -27,26 +27,29 @@ public class SecurityConfig {
             ServerHttpSecurity http) {
 
         return http
-                // Disable CSRF because this is a REST API
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
 
-                // Enable CORS support
                 .cors(cors -> {})
 
                 .authorizeExchange(exchange -> exchange
 
-                        // IMPORTANT: allow browser CORS preflight
+                        // CORS preflight
                         .pathMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
 
-                        // Login and registration don't need JWT
+                        // Public authentication endpoints
                         .pathMatchers(
                                 "/api/users/register",
-                                "/api/users/login"
+                                "/api/users/login",
+                                "/api/users/verify-email",
+                                "/api/users/resend-otp",
+                                "/api/users/forgot-password",
+                                "/api/users/verify-reset-otp",
+                                "/api/users/reset-password"
                         )
                         .permitAll()
 
-                        // Everything else requires JWT
+                        // Protected endpoints
                         .anyExchange()
                         .authenticated()
                 )

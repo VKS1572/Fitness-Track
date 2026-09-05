@@ -170,33 +170,55 @@ function App() {
       setLoading(false);
     }
   };
+useEffect(() => {
+  if (isAuthenticated && USER_ID) {
+    fetchDashboard();
+  }
+}, [isAuthenticated, USER_ID]);
 
   // =========================================================
   // LOAD DASHBOARD AFTER LOGIN
   // =========================================================
 
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    let objectUrl;
 
-    if (!token) {
-      setIsAuthenticated(false);
-      setShowLanding(true);
-      setLoading(false);
-      return;
-    }
+    const loadProfileImage = async () => {
+      if (!user?.id || !user?.profileImage) {
+        setProfileImageUrl(null);
+        return;
+      }
 
-    setIsAuthenticated(true);
-    setShowLanding(false);
+      try {
+        const response = await api.get(
+          `/api/users/${user.id}/profile-image`,
+          {
+            responseType: "blob",
+          }
+        );
 
-    if (USER_ID) {
-      fetchDashboard();
-    } else {
-      setLoading(false);
-    }
+        objectUrl = URL.createObjectURL(response.data);
+        setProfileImageUrl(objectUrl);
 
-    // USER_ID intentionally controls when dashboard data loads
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [USER_ID]);
+      } catch (error) {
+        console.error(
+          "Dashboard profile image load error:",
+          error
+        );
+        setProfileImageUrl(null);
+      }
+    };
+
+    loadProfileImage();
+
+    return () => {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
+  }, [user?.id, user?.profileImage]);
 
   // =========================================================
   // HANDLE INPUT CHANGE
@@ -692,7 +714,47 @@ function App() {
     user?.username ||
     user?.firstName ||
     "Fitness User";
+  const userInitials = (() => {
+    const firstName = user?.firstName?.trim() || "";
+    const lastName = user?.lastName?.trim() || "";
 
+    if (firstName && lastName) {
+      return (
+        firstName.charAt(0) +
+        lastName.charAt(0)
+      ).toUpperCase();
+    }
+
+    if (firstName) {
+      return firstName
+        .slice(0, 2)
+        .toUpperCase();
+    }
+
+    const name =
+      user?.name ||
+      user?.username ||
+      "";
+
+    if (name) {
+      const parts = name
+        .trim()
+        .split(/\s+/);
+
+      if (parts.length >= 2) {
+        return (
+          parts[0].charAt(0) +
+          parts[1].charAt(0)
+        ).toUpperCase();
+      }
+
+      return name
+        .slice(0, 2)
+        .toUpperCase();
+    }
+
+    return "FU";
+  })();
   // =========================================================
   // LOGIN / REGISTER
   // =========================================================
@@ -985,9 +1047,16 @@ function App() {
 
           <div className="user-mini">
 
-            <div className="avatar">
-              <User size={18} />
-            </div>
+           <div className="avatar">
+             {profileImageUrl ? (
+               <img
+                 src={profileImageUrl}
+                 alt={userName}
+               />
+             ) : (
+               <span>{userInitials}</span>
+             )}
+           </div>
 
             <div>
 
@@ -1628,6 +1697,8 @@ function App() {
 
               <div className="topbar-actions">
 
+
+
                 <button
                   className="notification"
                   type="button"
@@ -1635,9 +1706,16 @@ function App() {
                   <Bell size={19} />
                 </button>
 
-                <div className="top-avatar">
-                  <User size={18} />
-                </div>
+               <div className="top-avatar">
+                 {profileImageUrl ? (
+                   <img
+                     src={profileImageUrl}
+                     alt={userName}
+                   />
+                 ) : (
+                   <span>{userInitials}</span>
+                 )}
+               </div>
 
               </div>
 
@@ -1663,6 +1741,17 @@ function App() {
 
               </div>
             )}
+
+        <div className="dashboard-add-wrapper">
+          <button
+            className="primary-button dashboard-add-button"
+            onClick={handleAddActivity}
+            type="button"
+          >
+            <Plus size={19} />
+            Add Activity
+          </button>
+        </div>
 
             {/* =================================================
                 DASHBOARD STATS
@@ -1716,11 +1805,11 @@ function App() {
                 </div>
 
                 <strong>
-                  {totalMinutes}
+                  {Math.floor(totalMinutes / 60)}h {totalMinutes % 60}m
                 </strong>
 
                 <p>
-                  minutes completed
+                  total workout time
                 </p>
 
               </div>
@@ -2018,212 +2107,225 @@ function App() {
 
             <section className="activities-section">
 
-              <div className="section-heading">
+               <div className="section-heading">
 
-                <div>
+                 <div>
 
-                  <p className="eyebrow">
-                    YOUR WORKOUTS
-                  </p>
+                   <p className="eyebrow">
+                     YOUR WORKOUTS
+                   </p>
 
-                  <h2>
-                    Recent Activities
-                  </h2>
+                   <h2>
+                     Recent Activities
+                   </h2>
 
-                </div>
+                 </div>
 
-                <button
-                  className="primary-button"
-                  onClick={
-                    handleAddActivity
-                  }
-                  type="button"
-                >
-                  <Plus size={19} />
-                  Add Activity
-                </button>
+               </div>
 
-              </div>
+               {/* EMPTY STATE */}
 
-              {/* EMPTY STATE */}
+               {activities.length === 0 ? (
 
-              {activities.length === 0 ? (
+                 <div className="empty-state">
 
-                <div className="empty-state">
+                   <Activity size={40} />
 
-                  <Activity size={40} />
+                   <h3>
+                     No activities yet
+                   </h3>
 
-                  <h3>
-                    No activities yet
-                  </h3>
+                   <p>
+                     Start your fitness
+                     journey by adding
+                     your first workout.
+                   </p>
 
-                  <p>
-                    Start your fitness
-                    journey by adding
-                    your first workout.
-                  </p>
+                   <button
+                     className="primary-button"
+                     onClick={
+                       handleAddActivity
+                     }
+                     type="button"
+                   >
+                     <Plus size={18} />
+                     Add Activity
+                   </button>
 
-                  <button
-                    className="primary-button"
-                    onClick={
-                      handleAddActivity
-                    }
-                    type="button"
-                  >
-                    <Plus size={18} />
-                    Add Activity
-                  </button>
+                 </div>
 
-                </div>
+               ) : (
 
-              ) : (
+                 <>
 
-                <div className="activity-list">
+                   <div className="activity-list">
 
-                  {activities.map(
-                    (activity) => {
+                     {[...activities]
+                       .sort(
+                         (a, b) =>
+                           getActivityTimestamp(b) -
+                           getActivityTimestamp(a)
+                       )
+                       .slice(0, 5)
+                       .map((activity) => {
 
-                      const Icon =
-                        activityIcons[
-                          activity.type
-                        ] || Activity;
+                         const Icon =
+                           activityIcons[
+                             activity.type
+                           ] || Activity;
 
-                      return (
-                        <div
-                          className="activity-row"
-                          key={
-                            activity.id
-                          }
-                        >
+                         return (
+                           <div
+                             className="activity-row"
+                             key={
+                               activity.id
+                             }
+                           >
 
-                          {/* ACTIVITY MAIN */}
+                             {/* ACTIVITY MAIN */}
 
-                          <div className="activity-main">
+                             <div className="activity-main">
 
-                            <div className="activity-icon">
-                              <Icon size={21} />
-                            </div>
+                               <div className="activity-icon">
+                                 <Icon size={21} />
+                               </div>
 
-                            <div>
+                               <div>
 
-                              <h3>
-                                {activity.type
-                                  ? activity.type
-                                      .charAt(0)
-                                      .toUpperCase() +
-                                    activity.type
-                                      .slice(1)
-                                      .toLowerCase()
-                                  : "Workout"}
-                              </h3>
+                                 <h3>
+                                   {activity.type
+                                     ? activity.type
+                                         .charAt(0)
+                                         .toUpperCase() +
+                                       activity.type
+                                         .slice(1)
+                                         .toLowerCase()
+                                     : "Workout"}
+                                 </h3>
 
-                              <p>
+                                 <p>
 
-                                {activity.startTime
-                                  ? new Date(
-                                      activity.startTime
-                                    ).toLocaleString(
-                                      "en-IN",
-                                      {
-                                        day:
-                                          "2-digit",
-                                        month:
-                                          "short",
-                                        year:
-                                          "numeric",
-                                        hour:
-                                          "2-digit",
-                                        minute:
-                                          "2-digit",
-                                      }
-                                    )
-                                  : "No start time"}
+                                   {activity.startTime
+                                     ? new Date(
+                                         activity.startTime
+                                       ).toLocaleString(
+                                         "en-IN",
+                                         {
+                                           day:
+                                             "2-digit",
+                                           month:
+                                             "short",
+                                           year:
+                                             "numeric",
+                                           hour:
+                                             "2-digit",
+                                           minute:
+                                             "2-digit",
+                                         }
+                                       )
+                                     : "No start time"}
 
-                              </p>
+                                 </p>
 
-                            </div>
+                               </div>
 
-                          </div>
+                             </div>
 
-                          {/* METRICS */}
+                             {/* METRICS */}
 
-                          <div className="activity-metrics">
+                             <div className="activity-metrics">
 
-                            <div>
+                               <div>
 
-                              <span>
-                                Duration
-                              </span>
+                                 <span>
+                                   Duration
+                                 </span>
 
-                              <strong>
-                                {
-                                  activity.duration
-                                }{" "}
-                                min
-                              </strong>
+                                 <strong>
+                                   {
+                                     activity.duration
+                                   }{" "}
+                                   min
+                                 </strong>
 
-                            </div>
+                               </div>
 
-                            <div>
+                               <div>
 
-                              <span>
-                                Calories
-                              </span>
+                                 <span>
+                                   Calories
+                                 </span>
 
-                              <strong>
-                                {
-                                  activity.caloriesBurned ||
-                                  0
-                                }{" "}
-                                kcal
-                              </strong>
+                                 <strong>
+                                   {
+                                     activity.caloriesBurned ||
+                                     0
+                                   }{" "}
+                                   kcal
+                                 </strong>
 
-                            </div>
+                               </div>
 
-                            {/* EDIT */}
+                               {/* EDIT */}
 
-                            <button
-                              className="edit-button"
-                              onClick={() =>
-                                handleEditActivity(
-                                  activity
-                                )
-                              }
-                              title="Edit activity"
-                              type="button"
-                            >
-                              <span>
-                                ✎
-                              </span>
-                            </button>
+                               <button
+                                 className="edit-button"
+                                 onClick={() =>
+                                   handleEditActivity(
+                                     activity
+                                   )
+                                 }
+                                 title="Edit activity"
+                                 type="button"
+                               >
+                                 <span>
+                                   ✎
+                                 </span>
+                               </button>
 
-                            {/* DELETE */}
+                               {/* DELETE */}
 
-                            <button
-                              className="delete-button"
-                              onClick={() =>
-                                handleDeleteActivity(
-                                  activity.id
-                                )
-                              }
-                              title="Delete activity"
-                              type="button"
-                            >
-                              <X size={18} />
-                            </button>
+                               <button
+                                 className="delete-button"
+                                 onClick={() =>
+                                   handleDeleteActivity(
+                                     activity.id
+                                   )
+                                 }
+                                 title="Delete activity"
+                                 type="button"
+                               >
+                                 <X size={18} />
+                               </button>
 
-                          </div>
+                             </div>
 
-                        </div>
-                      );
-                    }
-                  )}
+                           </div>
+                         );
+                       })}
 
-                </div>
+                   </div>
 
-              )}
+                   {/* VIEW ALL */}
 
-            </section>
+
+                     <button
+                       className="view-all-activities"
+                       type="button"
+                       onClick={() =>
+                         setActivePage("activities")
+                       }
+                     >
+                       View All Activities
+                       <span>→</span>
+                     </button>
+
+
+                 </>
+
+               )}
+
+             </section>
 
           </>
 

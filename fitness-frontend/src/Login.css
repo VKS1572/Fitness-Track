@@ -641,3 +641,123 @@
     transform: none !important;
   }
 }
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.password-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.password-label-row label {
+  margin-bottom: 9px;
+}
+
+.forgot-password {
+  padding: 0;
+  margin: 0 0 9px;
+
+  border: none;
+  background: transparent;
+
+  color: #c9ff38;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.forgot-password:hover {
+  color: #ddff7c;
+  transform: translateY(-1px);
+}
+
+.login-success {
+  margin-bottom: 20px;
+
+  padding: 12px 14px;
+
+  border-radius: 12px;
+
+  color: #dfff9b;
+
+  background: rgba(201, 255, 56, 0.08);
+
+  border: 1px solid rgba(201, 255, 56, 0.18);
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.reset-email {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #c9ff38;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  word-break: break-word;
+}
+
+.back-login-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+
+  margin-top: 22px;
+  padding: 10px;
+
+  border: none;
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.50);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-login-button:hover {
+  color: #c9ff38;
+  transform: translateX(-2px);
+}
+
+@media (max-width: 600px) {
+
+  .password-label-row {
+    align-items: flex-start;
+  }
+
+  .forgot-password {
+    font-size: 10px;
+  }
+
+  .back-login-button {
+    margin-top: 18px;
+  }
+}

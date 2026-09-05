@@ -27,9 +27,21 @@ public class User {
     private String firstName;
 
     private String lastName;
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @Column(nullable = false)
+    private boolean emailVerified = false;
+
+    private String emailVerificationOtp;
+
+    private LocalDateTime otpExpiry;
+
+    private String passwordResetOtp;
+
+    private LocalDateTime passwordResetOtpExpiry;
 
     private LocalDateTime createdAt;
 
@@ -37,6 +49,7 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
+
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
 

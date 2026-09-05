@@ -1,6 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 /* =========================================================
    FITTRACK - GLOBAL STYLES
 ========================================================= */
+.app {
+  font-family: 'Inter', sans-serif;
+}
+
+.app h1,
+.app h2,
+.app h3,
+.app h4,
+.app h5,
+.app h6 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.app button,
+.app input,
+.app select,
+.app textarea {
+  font-family: 'Inter', sans-serif;
+}
+
+
 
 * {
   box-sizing: border-box;
@@ -4728,4 +4750,184 @@ body.dark-mode .activity-history-card .section-eyebrow {
   to {
     transform: rotate(-360deg);
   }
+}
+/* =========================================================
+   AI FITNESS COACH - BACKGROUND IMAGE
+========================================================= */
+
+.app .coach-card {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 9, 8, 0.97) 0%,
+      rgba(8, 9, 8, 0.88) 42%,
+      rgba(8, 9, 8, 0.55) 72%,
+      rgba(8, 9, 8, 0.28) 100%
+    ),
+    url("/Aii.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.activities-section .activity-row {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 9, 8, 0.88),
+      rgba(8, 9, 8, 0.65)
+    ),
+    url("/grey.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* =========================================================
+   VIEW ALL ACTIVITIES
+========================================================= */
+
+.view-all-activities {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  height: 48px;
+
+  margin-top: 20px;
+  padding: 0 20px;
+
+  border: 2px solid #c9ff38 !important;
+  border-radius: 10px;
+
+  background: #18210f !important;
+  color: #c9ff38 !important;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.view-all-activities:hover {
+  background: #c9ff38 !important;
+  color: #080908 !important;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 24px rgba(201, 255, 56, 0.20);
+}
+
+.view-all-activities span {
+  display: inline-block;
+  color: inherit !important;
+  font-size: 20px;
+  line-height: 1;
+
+  transition: transform 0.25s ease;
+}
+
+.view-all-activities:hover span {
+  transform: translateX(5px);
+}
+
+//Add activty in dashboard
+.dashboard-add-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px 0 30px;
+}
+
+.dashboard-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  white-space: nowrap;
+
+  transform: translateY(-20px);
+}
+@media (max-width: 600px) {
+  .dashboard-add-wrapper {
+    margin: 16px 0 20px;
+  }
+
+  .dashboard-add-button {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}
+/* =========================================================
+   PROFILE AVATAR
+   ========================================================= */
+
+.avatar,
+.top-avatar {
+  overflow: hidden;
+}
+
+.avatar img,
+.top-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.avatar span,
+.top-avatar span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+.profile-avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-avatar span {
+  font-size: 24px;
+  font-weight: 700;
 }
