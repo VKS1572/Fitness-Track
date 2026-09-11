@@ -71,7 +71,7 @@ management:
       access: read-only
 
 jwt:
-  secret: fitness-app-secret-key-for-jwt-token-generation-2026
+  secret: ${JWT_SECRET}
 
 logging:
   level:
