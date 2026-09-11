@@ -42,7 +42,10 @@ spring:
               uri: lb://RECOMMENDATION-SERVICE
               predicates:
                 - Path=/api/recommendations/**
-
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/notifications/**
 server:
   port: 8080
 
@@ -69,7 +72,8 @@ management:
 
 jwt:
   secret: fitness-app-secret-key-for-jwt-token-generation-2026
-  logging:
-    level:
-      org.springframework.security: DEBUG
-      org.springframework.cloud.gateway: DEBUG
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG

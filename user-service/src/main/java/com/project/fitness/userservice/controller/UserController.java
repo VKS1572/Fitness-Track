@@ -18,6 +18,8 @@ import com.project.fitness.userservice.dto.VerifyResetOtpRequest;
 import com.project.fitness.userservice.dto.ResetPasswordRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
+import com.project.fitness.userservice.dto.UpdateUserRequest;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -78,10 +80,10 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUser(
             @PathVariable Long id,
-            @RequestBody User updatedUser) {
+            @RequestBody UpdateUserRequest request) {
 
         User user =
-                userService.updateUser(id, updatedUser);
+                userService.updateUser(id, request);
 
         return ResponseEntity.ok(
                 UserResponse.from(user)

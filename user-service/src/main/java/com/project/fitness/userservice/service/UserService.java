@@ -17,6 +17,7 @@ import com.project.fitness.userservice.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.project.fitness.userservice.dto.UpdateUserRequest;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -509,7 +510,7 @@ public class UserService {
 
     public User updateUser(
             Long id,
-            User updatedUser) {
+            UpdateUserRequest request) {
 
         User user =
                 userRepository
@@ -521,18 +522,16 @@ public class UserService {
                         );
 
         user.setFirstName(
-                updatedUser.getFirstName()
+                request.firstName()
         );
 
         user.setLastName(
-                updatedUser.getLastName()
+                request.lastName()
         );
 
         user.setEmail(
-                updatedUser.getEmail()
+                request.email()
         );
-
-
 
         return userRepository.save(user);
     }

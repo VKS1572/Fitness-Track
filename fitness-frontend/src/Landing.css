@@ -3212,3 +3212,23 @@
 
   text-align: center;
 }
+.landing-logo-image {
+  width: 95px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.footer-logo .landing-logo-image {
+  width: 100px;
+}
+
+@media (max-width: 700px) {
+  .landing-logo-image {
+    width: 100px;
+  }
+
+  .footer-logo .landing-logo-image {
+    width: 105px;
+  }
+}

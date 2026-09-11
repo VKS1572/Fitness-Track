@@ -81,15 +81,11 @@ function Landing({ onGetStarted, onSignIn,onOpenFooterPage }) {
           onClick={handleHome}
         >
 
-          <div className="landing-logo-mark">
-
-            <span></span>
-
-            <span></span>
-
-            <span></span>
-
-          </div>
+          <img
+            src="/logo.png"
+            alt="FitTrack"
+            className="landing-logo-image"
+          />
 
 
           <span className="landing-logo-text">
@@ -717,11 +713,11 @@ function Landing({ onGetStarted, onSignIn,onOpenFooterPage }) {
                     onClick={handleHome}
                   >
 
-                    <div className="landing-logo-mark">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
+                    <img
+                      src="/logo.png"
+                      alt="FitTrack"
+                      className="landing-logo-image"
+                    />
 
                     <span className="landing-logo-text">
                       Fit<span>Track</span>

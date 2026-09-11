@@ -1,6 +1,7 @@
 package com.project.fitness.userservice.security;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,15 @@ public class JwtService {
             SECRET_KEY.getBytes(StandardCharsets.UTF_8)
     );
 
-    public String generateToken(Long userId, String email, String role) {
+    // =========================================================
+    // GENERATE JWT TOKEN
+    // =========================================================
+
+    public String generateToken(
+            Long userId,
+            String email,
+            String role
+    ) {
 
         Date now = new Date();
 
@@ -31,13 +40,32 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(email)
+
+                // User ID
                 .claim("userId", userId)
+
+                // User role
                 .claim("role", role)
+
+                // Token creation time
                 .issuedAt(now)
+
+                // Token expiry
                 .expiration(expiration)
-                .signWith(key)
+
+                // IMPORTANT:
+                // Gateway also uses HS384
+                .signWith(
+                        key,
+                        SignatureAlgorithm.HS384
+                )
+
                 .compact();
     }
+
+    // =========================================================
+    // EXTRACT EMAIL
+    // =========================================================
 
     public String extractEmail(String token) {
 
@@ -49,9 +77,42 @@ public class JwtService {
                 .getSubject();
     }
 
+    // =========================================================
+    // EXTRACT USER ID
+    // =========================================================
+
+    public Long extractUserId(String token) {
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("userId", Long.class);
+    }
+
+    // =========================================================
+    // EXTRACT ROLE
+    // =========================================================
+
+    public String extractRole(String token) {
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("role", String.class);
+    }
+
+    // =========================================================
+    // VALIDATE TOKEN
+    // =========================================================
+
     public boolean isTokenValid(String token) {
 
         try {
+
             Jwts.parser()
                     .verifyWith(key)
                     .build()
@@ -60,6 +121,7 @@ public class JwtService {
             return true;
 
         } catch (Exception e) {
+
             return false;
         }
     }

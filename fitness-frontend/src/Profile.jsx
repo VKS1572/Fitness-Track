@@ -1,10 +1,26 @@
 import { useEffect, useState } from "react";
 import api from "./api/axios";
 
+import {
+  Camera,
+  Check,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+  KeyRound,
+  LockKeyhole,
+  Mail,
+  Save,
+  ShieldCheck,
+  Trash2,
+  Upload,
+  UserRound,
+} from "lucide-react";
+
 function Profile({ user, onUserUpdated }) {
-  // =========================
+  // =========================================================
   // PROFILE FORM
-  // =========================
+  // =========================================================
 
   const [form, setForm] = useState({
     firstName: user?.firstName || "",
@@ -16,18 +32,53 @@ function Profile({ user, onUserUpdated }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  // =========================
+  // =========================================================
   // PROFILE IMAGE
-  // =========================
+  // =========================================================
 
   const [profileImage, setProfileImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [imageError, setImageError] = useState("");
 
-  // =========================
+  // =========================================================
+  // PASSWORD
+  // =========================================================
+
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const [showCurrentPassword, setShowCurrentPassword] =
+    useState(false);
+
+  const [showNewPassword, setShowNewPassword] =
+    useState(false);
+
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
+
+  // =========================================================
+  // KEEP FORM IN SYNC WITH USER
+  // =========================================================
+
+  useEffect(() => {
+    setForm({
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      email: user?.email || "",
+    });
+  }, [user]);
+
+  // =========================================================
   // LOAD PROFILE IMAGE
-  // =========================
+  // =========================================================
 
   useEffect(() => {
     let objectUrl;
@@ -68,34 +119,20 @@ function Profile({ user, onUserUpdated }) {
     };
   }, [user?.id, user?.profileImage]);
 
-  // =========================
-  // PASSWORD FORM
-  // =========================
-
-  const [passwordForm, setPasswordForm] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
-
-  const [passwordLoading, setPasswordLoading] = useState(false);
-  const [passwordMessage, setPasswordMessage] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  // =========================
+  // =========================================================
   // PROFILE INPUT CHANGE
-  // =========================
+  // =========================================================
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setForm((previous) => ({
+      ...previous,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
-  // =========================
+  // =========================================================
   // PROFILE IMAGE CHANGE
-  // =========================
+  // =========================================================
 
   const handleProfileImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -105,8 +142,8 @@ function Profile({ user, onUserUpdated }) {
     }
 
     setImageError("");
+    setMessage("");
 
-    // Check image type
     if (!file.type.startsWith("image/")) {
       setImageError(
         "Please select a valid image file."
@@ -114,7 +151,6 @@ function Profile({ user, onUserUpdated }) {
       return;
     }
 
-    // Maximum 5 MB
     if (file.size > 5 * 1024 * 1024) {
       setImageError(
         "Image size must be less than 5 MB."
@@ -124,14 +160,15 @@ function Profile({ user, onUserUpdated }) {
 
     setProfileImage(file);
 
-    // Preview selected image
-    const previewUrl = URL.createObjectURL(file);
+    const previewUrl =
+      URL.createObjectURL(file);
+
     setImagePreview(previewUrl);
   };
 
-  // =========================
+  // =========================================================
   // UPLOAD PROFILE IMAGE
-  // =========================
+  // =========================================================
 
   const handleProfileImageUpload = async () => {
     if (!profileImage) {
@@ -154,22 +191,18 @@ function Profile({ user, onUserUpdated }) {
 
       const updatedUser = response.data;
 
-      // Update local storage
       localStorage.setItem(
         "user",
         JSON.stringify(updatedUser)
       );
 
-      // Update App.jsx
       onUserUpdated?.(updatedUser);
 
-      // Clear selected file
       setProfileImage(null);
 
       setMessage(
         "Profile photo updated successfully."
       );
-
     } catch (err) {
       console.error(
         "Profile image upload error:",
@@ -183,19 +216,18 @@ function Profile({ user, onUserUpdated }) {
       } else {
         setImageError(
           err.response?.data?.message ||
-          err.response?.data ||
-          "Unable to upload profile photo."
+            err.response?.data ||
+            "Unable to upload profile photo."
         );
       }
-
     } finally {
       setImageLoading(false);
     }
   };
 
-  // =========================
+  // =========================================================
   // REMOVE PROFILE IMAGE
-  // =========================
+  // =========================================================
 
   const handleRemoveProfileImage = async () => {
     setImageLoading(true);
@@ -209,13 +241,11 @@ function Profile({ user, onUserUpdated }) {
 
       const updatedUser = response.data;
 
-      // Update local storage
       localStorage.setItem(
         "user",
         JSON.stringify(updatedUser)
       );
 
-      // Update App.jsx
       onUserUpdated?.(updatedUser);
 
       setProfileImage(null);
@@ -224,7 +254,6 @@ function Profile({ user, onUserUpdated }) {
       setMessage(
         "Profile photo removed successfully."
       );
-
     } catch (err) {
       console.error(
         "Profile image remove error:",
@@ -238,19 +267,18 @@ function Profile({ user, onUserUpdated }) {
       } else {
         setImageError(
           err.response?.data?.message ||
-          err.response?.data ||
-          "Unable to remove profile photo."
+            err.response?.data ||
+            "Unable to remove profile photo."
         );
       }
-
     } finally {
       setImageLoading(false);
     }
   };
 
-  // =========================
+  // =========================================================
   // UPDATE PROFILE
-  // =========================
+  // =========================================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -267,19 +295,16 @@ function Profile({ user, onUserUpdated }) {
 
       const updatedUser = response.data;
 
-      // Update local storage
       localStorage.setItem(
         "user",
         JSON.stringify(updatedUser)
       );
 
-      // Update user in App.jsx
       onUserUpdated?.(updatedUser);
 
       setMessage(
         "Profile updated successfully."
       );
-
     } catch (err) {
       console.error(
         "Profile update error:",
@@ -293,18 +318,28 @@ function Profile({ user, onUserUpdated }) {
       } else {
         setError(
           err.response?.data?.message ||
-          "Unable to update profile."
+            "Unable to update profile."
         );
       }
-
     } finally {
       setLoading(false);
     }
   };
 
-  // =========================
+  // =========================================================
+  // PASSWORD INPUT
+  // =========================================================
+
+  const handlePasswordInput = (e) => {
+    setPasswordForm((previous) => ({
+      ...previous,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // =========================================================
   // CHANGE PASSWORD
-  // =========================
+  // =========================================================
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
@@ -312,7 +347,6 @@ function Profile({ user, onUserUpdated }) {
     setPasswordMessage("");
     setPasswordError("");
 
-    // Check empty fields
     if (
       !passwordForm.currentPassword ||
       !passwordForm.newPassword ||
@@ -324,7 +358,6 @@ function Profile({ user, onUserUpdated }) {
       return;
     }
 
-    // Check password length
     if (passwordForm.newPassword.length < 6) {
       setPasswordError(
         "New password must be at least 6 characters."
@@ -332,7 +365,6 @@ function Profile({ user, onUserUpdated }) {
       return;
     }
 
-    // Check password confirmation
     if (
       passwordForm.newPassword !==
       passwordForm.confirmPassword
@@ -361,13 +393,15 @@ function Profile({ user, onUserUpdated }) {
         "Password changed successfully."
       );
 
-      // Clear password fields
       setPasswordForm({
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       });
 
+      setShowCurrentPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmPassword(false);
     } catch (err) {
       console.error(
         "Password change error:",
@@ -381,42 +415,81 @@ function Profile({ user, onUserUpdated }) {
       } else {
         setPasswordError(
           err.response?.data?.message ||
-          err.response?.data ||
-          "Unable to change password."
+            err.response?.data ||
+            "Unable to change password."
         );
       }
-
     } finally {
       setPasswordLoading(false);
     }
   };
 
-  // =========================
+  // =========================================================
+  // HELPERS
+  // =========================================================
+
+  const firstName =
+    form.firstName?.trim() || "";
+
+  const lastName =
+    form.lastName?.trim() || "";
+
+  const displayName =
+    `${firstName} ${lastName}`.trim() ||
+    "Fitness User";
+
+  const initials =
+    `${firstName.charAt(0)}${lastName.charAt(0)}`
+      .toUpperCase() || "FU";
+
+  const passwordLength =
+    passwordForm.newPassword.length;
+
+  const passwordStrength =
+    passwordLength === 0
+      ? 0
+      : passwordLength < 6
+      ? 33
+      : passwordLength < 10
+      ? 66
+      : 100;
+
+  const passwordStrengthText =
+    passwordLength === 0
+      ? "Enter a new password"
+      : passwordLength < 6
+      ? "Too short"
+      : passwordLength < 10
+      ? "Good password"
+      : "Strong password";
+
+  // =========================================================
   // UI
-  // =========================
+  // =========================================================
 
   return (
-    <div className="profile-page">
+    <div className="profile-page profile-premium">
 
-      {/* =========================
+      {/* =====================================================
           PAGE HEADER
-      ========================= */}
+      ===================================================== */}
 
-      <div className="profile-header">
+      <div className="profile-header premium-profile-header">
 
         <div>
 
-          <p className="eyebrow">
+          <div className="profile-eyebrow">
+            <span className="profile-eyebrow-dot"></span>
             ACCOUNT
-          </p>
+          </div>
 
           <h1>
             Profile & Settings
           </h1>
 
           <p className="subtitle">
-            Manage your personal information
-            and account settings.
+            Manage your personal information,
+            security and account preferences.
           </p>
 
         </div>
@@ -424,31 +497,46 @@ function Profile({ user, onUserUpdated }) {
       </div>
 
 
-      {/* =========================
-          PROFILE CARD
-      ========================= */}
+      {/* =====================================================
+          MAIN PROFILE CARD
+      ===================================================== */}
 
-      <div className="profile-card">
+      <div className="profile-card premium-profile-card">
 
-        {/* USER INFORMATION */}
+        {/* ===================================================
+            PROFILE HERO
+        =================================================== */}
 
-        <div className="profile-user">
+        <section className="profile-hero">
 
-          <div className="profile-avatar-wrapper">
+          <div className="profile-hero-glow"></div>
 
-            <div className="profile-avatar">
+          <div className="premium-avatar-column">
 
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt={`${form.firstName} ${form.lastName}`}
-                />
-              ) : (
-                <span>
-                  {form.firstName?.charAt(0)?.toUpperCase() || "U"}
-                  {form.lastName?.charAt(0)?.toUpperCase() || ""}
-                </span>
-              )}
+            <div className="premium-avatar-ring">
+
+              <div className="profile-avatar premium-avatar">
+
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt={displayName}
+                  />
+                ) : (
+                  <span>
+                    {initials}
+                  </span>
+                )}
+
+              </div>
+
+              <label
+                htmlFor="profile-image-input"
+                className="avatar-camera-button"
+                title="Change profile photo"
+              >
+                <Camera size={16} />
+              </label>
 
             </div>
 
@@ -456,314 +544,502 @@ function Profile({ user, onUserUpdated }) {
               type="file"
               id="profile-image-input"
               accept="image/*"
-              onChange={handleProfileImageChange}
+              onChange={
+                handleProfileImageChange
+              }
               hidden
             />
 
-            <label
-              htmlFor="profile-image-input"
-              className="secondary-button"
-            >
-              Change Profile Photo
-            </label>
+            <div className="avatar-hint">
+              JPG, PNG or WEBP · Max 5 MB
+            </div>
 
-            {profileImage && (
-              <button
-                type="button"
-                className="primary-button"
-                onClick={handleProfileImageUpload}
-                disabled={imageLoading}
+          </div>
+
+
+          <div className="profile-hero-info">
+
+            <div className="profile-name-row">
+
+              <h2>
+                {displayName}
+              </h2>
+
+              <span className="verified-badge">
+                <CheckCircle2 size={14} />
+                Verified
+              </span>
+
+            </div>
+
+            <div className="profile-email-row">
+              <Mail size={15} />
+              {form.email || "No email available"}
+            </div>
+
+            <div className="profile-member-badge">
+              <ShieldCheck size={15} />
+              FitTrack Member
+            </div>
+
+            <div className="profile-photo-actions">
+
+              <label
+                htmlFor="profile-image-input"
+                className="profile-outline-button"
               >
-                {imageLoading
-                  ? "Uploading..."
-                  : "Upload Photo"}
-              </button>
-            )}
+                <Camera size={16} />
+                Change Photo
+              </label>
 
-            {imagePreview && (
-              <button
-                type="button"
-                className="danger-button"
-                onClick={handleRemoveProfileImage}
-                disabled={imageLoading}
-              >
-                Remove Photo
-              </button>
-            )}
+              {profileImage && (
+                <button
+                  type="button"
+                  className="profile-upload-button"
+                  onClick={
+                    handleProfileImageUpload
+                  }
+                  disabled={imageLoading}
+                >
+                  <Upload size={16} />
 
-            {imageError && (
-              <div className="profile-error">
-                {imageError}
+                  {imageLoading
+                    ? "Uploading..."
+                    : "Upload Photo"}
+                </button>
+              )}
+
+              {imagePreview && (
+                <button
+                  type="button"
+                  className="profile-remove-button"
+                  onClick={
+                    handleRemoveProfileImage
+                  }
+                  disabled={imageLoading}
+                >
+                  <Trash2 size={15} />
+                  Remove
+                </button>
+              )}
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* GLOBAL IMAGE MESSAGE */}
+
+        {imageError && (
+          <div className="premium-alert error">
+            <span>!</span>
+            {imageError}
+          </div>
+        )}
+
+        {message && (
+          <div className="premium-alert success">
+            <Check size={16} />
+            {message}
+          </div>
+        )}
+
+
+        {/* ===================================================
+            PERSONAL INFORMATION
+        =================================================== */}
+
+        <section className="profile-settings-section">
+
+          <div className="settings-section-header">
+
+            <div className="settings-section-icon">
+              <UserRound size={19} />
+            </div>
+
+            <div>
+              <div className="settings-section-eyebrow">
+                PROFILE
+              </div>
+
+              <h3>
+                Personal Information
+              </h3>
+
+              <p>
+                Keep your account information
+                up to date.
+              </p>
+            </div>
+
+          </div>
+
+
+          <form onSubmit={handleSubmit}>
+
+            <div className="premium-profile-grid">
+
+              {/* FIRST NAME */}
+
+              <div className="premium-field">
+
+                <label>
+                  First Name
+                </label>
+
+                <div className="premium-input-wrapper">
+
+                  <UserRound size={17} />
+
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    placeholder="Enter first name"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+
+              {/* LAST NAME */}
+
+              <div className="premium-field">
+
+                <label>
+                  Last Name
+                </label>
+
+                <div className="premium-input-wrapper">
+
+                  <UserRound size={17} />
+
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    placeholder="Enter last name"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+
+              {/* EMAIL */}
+
+              <div className="premium-field full">
+
+                <label>
+                  Email Address
+                </label>
+
+                <div className="premium-input-wrapper">
+
+                  <Mail size={17} />
+
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            {error && (
+              <div className="premium-alert error">
+                <span>!</span>
+                {error}
               </div>
             )}
 
-          </div>
 
-          <div>
+            <div className="premium-form-footer">
 
-            <h2>
-              {form.firstName}{" "}
-              {form.lastName}
-            </h2>
+              <span className="changes-hint">
+                Your information is stored securely.
+              </span>
 
-            <p>
-              {form.email}
-            </p>
+              <button
+                type="submit"
+                className="premium-primary-button"
+                disabled={loading}
+              >
+                <Save size={16} />
 
-          </div>
-
-        </div>
-
-
-        {/* =========================
-            PROFILE FORM
-        ========================= */}
-
-        <form onSubmit={handleSubmit}>
-
-          <div className="profile-form-grid">
-
-            {/* FIRST NAME */}
-
-            <div className="form-field">
-
-              <label>
-                First Name
-              </label>
-
-              <input
-                type="text"
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-                placeholder="Enter first name"
-                required
-              />
+                {loading
+                  ? "Saving..."
+                  : "Save Changes"}
+              </button>
 
             </div>
 
+          </form>
 
-            {/* LAST NAME */}
+        </section>
 
-            <div className="form-field">
 
-              <label>
-                Last Name
-              </label>
+        {/* ===================================================
+            SECURITY
+        =================================================== */}
 
-              <input
-                type="text"
-                name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
-                placeholder="Enter last name"
-                required
-              />
+        <section className="profile-settings-section security-section">
 
+          <div className="settings-section-header">
+
+            <div className="settings-section-icon security-icon">
+              <LockKeyhole size={19} />
             </div>
 
+            <div>
 
-            {/* EMAIL */}
+              <div className="settings-section-eyebrow">
+                SECURITY
+              </div>
 
-            <div className="form-field full">
+              <h3>
+                Change Password
+              </h3>
 
-              <label>
-                Email
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Enter email"
-                required
-              />
+              <p>
+                Use a strong password to protect
+                your FitTrack account.
+              </p>
 
             </div>
 
           </div>
 
-
-          {/* PROFILE SUCCESS */}
-
-          {message && (
-            <div className="profile-success">
-              {message}
-            </div>
-          )}
-
-
-          {/* PROFILE ERROR */}
-
-          {error && (
-            <div className="profile-error">
-              {error}
-            </div>
-          )}
-
-
-          {/* SAVE BUTTON */}
-
-          <div className="profile-actions">
-
-            <button
-              type="submit"
-              className="primary-button"
-              disabled={loading}
-            >
-              {loading
-                ? "Saving..."
-                : "Save Changes"}
-            </button>
-
-          </div>
-
-        </form>
-
-
-        {/* =========================
-            CHANGE PASSWORD
-        ========================= */}
-
-        <div className="password-section">
-
-          <div className="password-header">
-
-            <p className="eyebrow">
-              SECURITY
-            </p>
-
-            <h2>
-              Change Password
-            </h2>
-
-            <p>
-              Update your password to keep
-              your account secure.
-            </p>
-
-          </div>
-
-
-          {/* PASSWORD FORM */}
 
           <form
             onSubmit={handlePasswordChange}
           >
 
-            <div className="profile-form-grid">
+            <div className="premium-profile-grid">
 
               {/* CURRENT PASSWORD */}
 
-              <div className="form-field full">
+              <div className="premium-field full">
 
                 <label>
                   Current Password
                 </label>
 
-                <input
-                  type="password"
-                  value={
-                    passwordForm.currentPassword
-                  }
-                  onChange={(e) =>
-                    setPasswordForm({
-                      ...passwordForm,
-                      currentPassword:
-                        e.target.value,
-                    })
-                  }
-                  placeholder="Enter current password"
-                  required
-                />
+                <div className="premium-input-wrapper">
+
+                  <KeyRound size={17} />
+
+                  <input
+                    type={
+                      showCurrentPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="currentPassword"
+                    value={
+                      passwordForm.currentPassword
+                    }
+                    onChange={
+                      handlePasswordInput
+                    }
+                    placeholder="Enter current password"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-eye"
+                    onClick={() =>
+                      setShowCurrentPassword(
+                        (previous) =>
+                          !previous
+                      )
+                    }
+                    tabIndex={-1}
+                  >
+                    {showCurrentPassword ? (
+                      <EyeOff size={17} />
+                    ) : (
+                      <Eye size={17} />
+                    )}
+                  </button>
+
+                </div>
 
               </div>
 
 
               {/* NEW PASSWORD */}
 
-              <div className="form-field">
+              <div className="premium-field">
 
                 <label>
                   New Password
                 </label>
 
-                <input
-                  type="password"
-                  value={
-                    passwordForm.newPassword
-                  }
-                  onChange={(e) =>
-                    setPasswordForm({
-                      ...passwordForm,
-                      newPassword:
-                        e.target.value,
-                    })
-                  }
-                  placeholder="Minimum 6 characters"
-                  required
-                />
+                <div className="premium-input-wrapper">
+
+                  <LockKeyhole size={17} />
+
+                  <input
+                    type={
+                      showNewPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="newPassword"
+                    value={
+                      passwordForm.newPassword
+                    }
+                    onChange={
+                      handlePasswordInput
+                    }
+                    placeholder="Minimum 6 characters"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-eye"
+                    onClick={() =>
+                      setShowNewPassword(
+                        (previous) =>
+                          !previous
+                      )
+                    }
+                    tabIndex={-1}
+                  >
+                    {showNewPassword ? (
+                      <EyeOff size={17} />
+                    ) : (
+                      <Eye size={17} />
+                    )}
+                  </button>
+
+                </div>
+
+                {/* PASSWORD STRENGTH */}
+
+                <div className="password-strength">
+
+                  <div className="strength-track">
+
+                    <div
+                      className={`strength-fill strength-${passwordStrength}`}
+                      style={{
+                        width: `${passwordStrength}%`,
+                      }}
+                    />
+
+                  </div>
+
+                  <span>
+                    {passwordStrengthText}
+                  </span>
+
+                </div>
 
               </div>
 
 
               {/* CONFIRM PASSWORD */}
 
-              <div className="form-field">
+              <div className="premium-field">
 
                 <label>
                   Confirm New Password
                 </label>
 
-                <input
-                  type="password"
-                  value={
-                    passwordForm.confirmPassword
-                  }
-                  onChange={(e) =>
-                    setPasswordForm({
-                      ...passwordForm,
-                      confirmPassword:
-                        e.target.value,
-                    })
-                  }
-                  placeholder="Confirm new password"
-                  required
-                />
+                <div className="premium-input-wrapper">
+
+                  <LockKeyhole size={17} />
+
+                  <input
+                    type={
+                      showConfirmPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="confirmPassword"
+                    value={
+                      passwordForm.confirmPassword
+                    }
+                    onChange={
+                      handlePasswordInput
+                    }
+                    placeholder="Confirm new password"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="password-eye"
+                    onClick={() =>
+                      setShowConfirmPassword(
+                        (previous) =>
+                          !previous
+                      )
+                    }
+                    tabIndex={-1}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={17} />
+                    ) : (
+                      <Eye size={17} />
+                    )}
+                  </button>
+
+                </div>
 
               </div>
 
             </div>
 
 
-            {/* PASSWORD SUCCESS */}
-
             {passwordMessage && (
-              <div className="profile-success">
+              <div className="premium-alert success">
+                <Check size={16} />
                 {passwordMessage}
               </div>
             )}
 
 
-            {/* PASSWORD ERROR */}
-
             {passwordError && (
-              <div className="profile-error">
+              <div className="premium-alert error">
+                <span>!</span>
                 {passwordError}
               </div>
             )}
 
 
-            {/* CHANGE PASSWORD BUTTON */}
+            <div className="premium-form-footer">
 
-            <div className="profile-actions">
+              <span className="changes-hint">
+                We recommend using 8+ characters.
+              </span>
 
               <button
                 type="submit"
-                className="primary-button"
+                className="premium-primary-button"
                 disabled={passwordLoading}
               >
+                <ShieldCheck size={16} />
+
                 {passwordLoading
                   ? "Changing..."
                   : "Change Password"}
@@ -773,7 +1049,7 @@ function Profile({ user, onUserUpdated }) {
 
           </form>
 
-        </div>
+        </section>
 
       </div>
 

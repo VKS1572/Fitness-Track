@@ -761,3 +761,29 @@
     margin-top: 18px;
   }
 }
+.verify-email-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -6px;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.verify-email-row span {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.verify-email-row button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #c9ff38;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.verify-email-row button:hover {
+  text-decoration: underline;
+}

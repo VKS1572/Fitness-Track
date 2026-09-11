@@ -9,6 +9,7 @@ import com.project.fitness.activityservice.model.Activity;
 import com.project.fitness.activityservice.repository.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ActivityService {
     private final ActivityRepository activityRepository;
 
     private final ObjectMapper objectMapper;
+    private final RestTemplate restTemplate;
 
 
     // =========================
@@ -52,6 +54,29 @@ public class ActivityService {
                 .build();
 
         Activity savedActivity = activityRepository.save(activity);
+
+// Send notification
+        try {
+            String title = "New Workout Added";
+            String message = "Your " + savedActivity.getType()
+                    + " workout has been added successfully.";
+
+            String url = "http://NOTIFICATION-SERVICE/api/notifications"
+                    + "?userId=" + savedActivity.getUserId()
+                    + "&title=" + title
+                    + "&message=" + message;
+
+            restTemplate.postForObject(
+                    url,
+                    null,
+                    Object.class
+            );
+
+        } catch (Exception e) {
+            System.out.println(
+                    "Notification failed: " + e.getMessage()
+            );
+        }
 
         return ActivityResponse.fromEntity(
                 savedActivity,

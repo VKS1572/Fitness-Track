@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import api from "./api/axios";
 import Login from "./Login";
 import Register from "./Register";
+import VerifyEmail from "./VerifyEmail";
 import Profile from "./Profile";
 import SettingsPage from "./Settings";
 import Landing from "./Landing";
@@ -66,6 +67,7 @@ function App() {
   );
 
   const [showRegister, setShowRegister] = useState(false);
+  const [showVerifyEmail, setShowVerifyEmail] = useState(false);
 
   // =========================================================
   // USER
@@ -87,7 +89,7 @@ function App() {
   // =========================================================
   // DASHBOARD STATES
   // =========================================================
-
+  const [typedGreeting, setTypedGreeting] = useState("");
   const [activities, setActivities] = useState([]);
   const [recommendation, setRecommendation] = useState(null);
 
@@ -102,6 +104,8 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [editingActivity, setEditingActivity] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [activityToDelete, setActivityToDelete] = useState(null);
   const [activePage, setActivePage] = useState("dashboard");
   const [publicPage, setPublicPage] = useState(null);
 
@@ -110,6 +114,46 @@ function App() {
   const [activityTypeFilter, setActivityTypeFilter] = useState("ALL");
   const [activitySort, setActivitySort] = useState("NEWEST");
 
+
+   const [showNotifications, setShowNotifications] = useState(false);
+   const notificationRef = useRef(null);
+   const [notifications, setNotifications] = useState([]);
+   useEffect(() => {
+     const handleOutsideClick = (event) => {
+       if (
+         notificationRef.current &&
+         !notificationRef.current.contains(event.target)
+       ) {
+         setShowNotifications(false);
+       }
+     };
+
+     document.addEventListener("mousedown", handleOutsideClick);
+
+     return () => {
+       document.removeEventListener("mousedown", handleOutsideClick);
+     };
+   }, []);
+
+   useEffect(() => {
+     const fetchNotifications = async () => {
+       if (!USER_ID) return;
+
+       try {
+         const response = await api.get(
+           `/api/notifications/user/${USER_ID}`
+         );
+
+         setNotifications(response.data);
+       } catch (error) {
+         console.error("Notification fetch error:", error);
+       }
+     };
+
+     if (isAuthenticated && USER_ID) {
+       fetchNotifications();
+     }
+   }, [isAuthenticated, USER_ID]);
   // =========================================================
   // ACTIVITY FORM
   // =========================================================
@@ -256,6 +300,12 @@ useEffect(() => {
     setShowRegister(false);
   };
 
+  const handleVerifyEmail = () => {
+    setShowLanding(false);
+    setShowRegister(false);
+    setShowVerifyEmail(true);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -264,6 +314,7 @@ useEffect(() => {
     setUser(null);
     setShowLanding(true);
     setShowRegister(false);
+    setShowVerifyEmail(false);
     setActivePage("dashboard");
     setActivities([]);
     setRecommendation(null);
@@ -376,19 +427,23 @@ useEffect(() => {
   // DELETE ACTIVITY
   // =========================================================
 
-  const handleDeleteActivity = async (activityId) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this activity?"
-    );
+  const handleDeleteActivity = (activity) => {
+    setActivityToDelete(activity);
+    setShowDeleteModal(true);
+  };
 
-    if (!confirmed) return;
+  const confirmDeleteActivity = async () => {
+    if (!activityToDelete?.id) return;
 
     try {
       setError("");
 
       await api.delete(
-        `/api/activities/${activityId}`
+        `/api/activities/${activityToDelete.id}`
       );
+
+      setShowDeleteModal(false);
+      setActivityToDelete(null);
 
       await fetchDashboard();
     } catch (err) {
@@ -407,6 +462,11 @@ useEffect(() => {
           "Unable to delete activity."
       );
     }
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setActivityToDelete(null);
   };
 
   // =========================================================
@@ -709,11 +769,50 @@ useEffect(() => {
   // USER NAME
   // =========================================================
 
+const getGreeting = () => {
+  const hour = new Date().getHours();
+
+  if (hour >= 5 && hour < 12) {
+    return "Good Morning";
+  }
+
+  if (hour >= 12 && hour < 17) {
+    return "Good Afternoon";
+  }
+
+  if (hour >= 17 && hour < 21) {
+    return "Good Evening";
+  }
+
+  return "Good Night";
+};
+
+
   const userName =
     user?.name ||
     user?.username ||
     user?.firstName ||
     "Fitness User";
+
+   useEffect(() => {
+     const fullGreeting = `${getGreeting()} ${userName}`;
+
+     setTypedGreeting("");
+
+     let index = 0;
+
+     const typingInterval = setInterval(() => {
+       index++;
+
+       setTypedGreeting(fullGreeting.slice(0, index));
+
+       if (index >= fullGreeting.length) {
+         clearInterval(typingInterval);
+       }
+     }, 130);
+
+     return () => clearInterval(typingInterval);
+   }, [userName]);
   const userInitials = (() => {
     const firstName = user?.firstName?.trim() || "";
     const lastName = user?.lastName?.trim() || "";
@@ -755,6 +854,81 @@ useEffect(() => {
 
     return "FU";
   })();
+
+//Notification....
+const unreadNotifications = notifications.filter(
+  (notification) => !notification.read
+).length;
+
+const handleNotificationClick = async (id) => {
+  try {
+    await api.put(`/api/notifications/${id}/read`);
+
+    setNotifications((previous) =>
+      previous.map((notification) =>
+        notification.id === id
+          ? { ...notification, read: true }
+          : notification
+      )
+    );
+  } catch (error) {
+    console.error("Mark notification read error:", error);
+  }
+};
+
+const getNotificationIcon = (title = "") => {
+  const value = title.toLowerCase();
+
+  if (
+    value.includes("workout") ||
+    value.includes("activity") ||
+    value.includes("exercise")
+  ) {
+    return "💪";
+  }
+
+  if (
+    value.includes("goal") ||
+    value.includes("target") ||
+    value.includes("progress")
+  ) {
+    return "🎯";
+  }
+
+  if (
+    value.includes("achievement") ||
+    value.includes("completed") ||
+    value.includes("congrat")
+  ) {
+    return "🏆";
+  }
+
+  if (
+    value.includes("welcome") ||
+    value.includes("account")
+  ) {
+    return "👋";
+  }
+
+  return "🔔";
+};
+
+const handleMarkAllRead = async () => {
+  try {
+    await api.put(
+      `/api/notifications/user/${USER_ID}/read-all`
+    );
+
+    setNotifications((previous) =>
+      previous.map((notification) => ({
+        ...notification,
+        read: true,
+      }))
+    );
+  } catch (error) {
+    console.error("Mark all notifications read error:", error);
+  }
+};
   // =========================================================
   // LOGIN / REGISTER
   // =========================================================
@@ -848,12 +1022,38 @@ useEffect(() => {
         />
       );
     }
+  //3.verify
+  if (!isAuthenticated && showVerifyEmail) {
+    return (
+      <VerifyEmail
+        onLogin={() => {
+          setShowVerifyEmail(false);
+          setShowLanding(false);
+          setShowRegister(false);
+        }}
+        onBackToLogin={() => {
+          setShowVerifyEmail(false);
+          setShowLanding(false);
+          setShowRegister(false);
+        }}
+        onBackToLanding={() => {
+          setShowVerifyEmail(false);
+          setShowLanding(true);
+        }}
+      />
+    );
+  }
 
     return (
       <Login
         onLogin={handleLogin}
-        onRegister={() => setShowRegister(true)}
+        onRegister={() => {
+          setShowVerifyEmail(false);
+          setShowRegister(true);
+        }}
+        onVerifyEmail={handleVerifyEmail}
         onBack={() => {
+          setShowVerifyEmail(false);
           setShowLanding(true);
         }}
       />
@@ -895,9 +1095,11 @@ useEffect(() => {
 
         <div className="brand">
 
-          <div className="brand-icon">
-            <Activity size={20} />
-          </div>
+          <img
+             src="/logo.png"
+             alt="FitTrack"
+             className="dashboard-logo-image"
+           />
 
           <span>
             FitTrack
@@ -934,9 +1136,11 @@ useEffect(() => {
 
         <div className="brand desktop-brand">
 
-          <div className="brand-icon">
-            <Activity size={20} />
-          </div>
+          <img
+            src="/logo.png"
+            alt="FitTrack"
+            className="dashboard-logo-image"
+          />
 
           <span>
             FitTrack
@@ -1635,7 +1839,7 @@ useEffect(() => {
                               className="delete-button"
                               onClick={() =>
                                 handleDeleteActivity(
-                                  activity.id
+                                  activity
                                 )
                               }
                               title="Delete activity"
@@ -1681,8 +1885,7 @@ useEffect(() => {
                   </p>
 
                   <h1>
-                    Good morning,{" "}
-                    {userName}{" "}
+                    {typedGreeting}
                     <span>👋</span>
                   </h1>
 
@@ -1699,14 +1902,100 @@ useEffect(() => {
 
 
 
-                <button
-                  className="notification"
-                  type="button"
+                <div
+                  className="notification-wrapper"
+                  ref={notificationRef}
                 >
-                  <Bell size={19} />
-                </button>
+                  <button
+                    className="notification"
+                    onClick={() =>
+                      setShowNotifications((previous) => !previous)
+                    }
+                    type="button"
+                  >
+                    <Bell size={19} />
 
-               <div className="top-avatar">
+                    {unreadNotifications > 0 && (
+                      <span className="notification-badge">
+                        {unreadNotifications}
+                      </span>
+                    )}
+                  </button>
+
+                  {showNotifications && (
+                    <div className="notification-dropdown">
+                      <div className="notification-header">
+                        <div>
+                          <strong>Notifications</strong>
+                          <span>
+                            {unreadNotifications} unread
+                          </span>
+                        </div>
+
+                        {unreadNotifications > 0 && (
+                          <button
+                            type="button"
+                            onClick={handleMarkAllRead}
+                            className="mark-read-button"
+                          >
+                            Mark all read
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="notification-list">
+                        {notifications.length === 0 ? (
+                          <div className="notification-empty">
+                            <Bell size={24} />
+                            <p>You're all caught up</p>
+                            <span>No new notifications</span>
+                          </div>
+                        ) : (
+                          notifications.map((notification) => (
+                            <button
+                              key={notification.id}
+                              type="button"
+                              className={`notification-item ${
+                                !notification.read ? "unread" : ""
+                              }`}
+                              onClick={() =>
+                                handleNotificationClick(notification.id)
+                              }
+                            >
+                              <div className="notification-icon">
+                                <span>{getNotificationIcon(notification.title)}</span>
+                              </div>
+
+                              <div className="notification-content">
+                                <strong>{notification.title}</strong>
+                                <p>{notification.message}</p>
+                                <small>
+                                  {new Date(notification.createdAt).toLocaleString([], {
+                                    dateStyle: "medium",
+                                    timeStyle: "short",
+                                  })}
+                                </small>
+                              </div>
+                            </button>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+               <div
+                 className="top-avatar"
+                 onClick={() => setActivePage("profile")}
+                 role="button"
+                 tabIndex={0}
+                 title="View Profile"
+                 onKeyDown={(e) => {
+                   if (e.key === "Enter" || e.key === " ") {
+                     setActivePage("profile");
+                   }
+                 }}
+               >
                  {profileImageUrl ? (
                    <img
                      src={profileImageUrl}
@@ -1899,7 +2188,7 @@ useEffect(() => {
 
                 {/* WORKOUTS */}
 
-                <div className="progress-card">
+                <div className="progress-card workout-progress-card">
 
                   <div className="progress-card-top">
 
@@ -1946,7 +2235,7 @@ useEffect(() => {
 
                 {/* MINUTES */}
 
-                <div className="progress-card">
+                <div className="progress-card minutes-progress-card">
 
                   <div className="progress-card-top">
 
@@ -1993,7 +2282,7 @@ useEffect(() => {
 
                 {/* CALORIES */}
 
-                <div className="progress-card">
+                <div className="progress-card calories-progress-card">
 
                   <div className="progress-card-top">
 
@@ -2242,10 +2531,8 @@ useEffect(() => {
                                  </span>
 
                                  <strong>
-                                   {
-                                     activity.duration
-                                   }{" "}
-                                   min
+                                   {activity.duration}{" "}
+                                   <span className="unit-min">min</span>
                                  </strong>
 
                                </div>
@@ -2257,11 +2544,8 @@ useEffect(() => {
                                  </span>
 
                                  <strong>
-                                   {
-                                     activity.caloriesBurned ||
-                                     0
-                                   }{" "}
-                                   kcal
+                                   {activity.caloriesBurned || 0}{" "}
+                                   <span className="unit-kcal">kcal</span>
                                  </strong>
 
                                </div>
@@ -2289,7 +2573,7 @@ useEffect(() => {
                                  className="delete-button"
                                  onClick={() =>
                                    handleDeleteActivity(
-                                     activity.id
+                                     activity
                                    )
                                  }
                                  title="Delete activity"
@@ -2466,7 +2750,7 @@ useEffect(() => {
                       placeholder="30"
                     />
 
-                    <span>
+                    <span className="unit-min">
                       min
                     </span>
 
@@ -2498,7 +2782,7 @@ useEffect(() => {
                       placeholder="250"
                     />
 
-                    <span>
+                    <span className="unit-kcal">
                       kcal
                     </span>
 
@@ -2584,6 +2868,121 @@ useEffect(() => {
         </div>
 
       )}
+  {/* =====================================================
+      DELETE ACTIVITY CONFIRMATION
+  ===================================================== */}
+
+  {showDeleteModal && activityToDelete && (
+    <div
+      className="delete-modal-overlay"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) {
+          closeDeleteModal();
+        }
+      }}
+    >
+      <div className="delete-modal">
+
+        <button
+          type="button"
+          className="delete-modal-close"
+          onClick={closeDeleteModal}
+          aria-label="Close"
+        >
+          <X size={18} />
+        </button>
+
+
+
+        <div className="delete-modal-content">
+
+          <span className="delete-modal-eyebrow">
+            REMOVE WORKOUT
+          </span>
+
+          <h2>
+            Delete this activity?
+          </h2>
+
+          <p className="delete-modal-description">
+            You're about to permanently remove this
+            workout from your activity history.
+          </p>
+
+          <div className="delete-activity-preview">
+
+            <div className="delete-preview-icon">
+              {(() => {
+                const Icon =
+                  activityIcons[activityToDelete.type] || Activity;
+
+                return <Icon size={22} />;
+              })()}
+            </div>
+
+            <div className="delete-preview-info">
+              <strong>
+                {activityToDelete.type === "RUNNING"
+                  ? "Running"
+                  : activityToDelete.type === "WALKING"
+                  ? "Walking"
+                  : activityToDelete.type === "CYCLING"
+                  ? "Cycling"
+                  : activityToDelete.type === "SWIMMING"
+                  ? "Swimming"
+                  : activityToDelete.type === "WORKOUT"
+                  ? "Workout"
+                  : activityToDelete.type || "Workout"}
+              </strong>
+
+              <div className="delete-preview-metrics">
+                <span>
+                  {Number(activityToDelete.duration || 0)} min
+                </span>
+
+                <span className="metric-dot">•</span>
+
+                <span>
+                  {Number(activityToDelete.caloriesBurned || 0)} kcal
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="delete-warning">
+            <span>!</span>
+            <p>
+              This action cannot be undone.
+            </p>
+          </div>
+
+        </div>
+
+        <div className="delete-modal-actions">
+
+          <button
+            type="button"
+            className="delete-cancel-button"
+            onClick={closeDeleteModal}
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            className="delete-confirm-button"
+            onClick={confirmDeleteActivity}
+          >
+            <X size={17} />
+            Delete Activity
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  )}
 
     </div>
   );

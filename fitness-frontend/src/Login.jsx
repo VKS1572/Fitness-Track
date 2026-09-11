@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import api from "./api/axios";
 import "./Login.css";
 
-function Login({ onLogin, onRegister, onBack }) {
+function Login({ onLogin, onRegister, onBack, onVerifyEmail }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -589,7 +589,16 @@ function Login({ onLogin, onRegister, onBack }) {
                   Forgot Password?
                 </button>
               </div>
+              <div className="verify-email-row">
+                <span>Not verified your email?</span>
 
+                <button
+                  type="button"
+                  onClick={onVerifyEmail}
+                >
+                  Verify Email
+                </button>
+              </div>
               <input
                 id="password"
                 type="password"
