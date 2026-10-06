@@ -7,14 +7,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -29,12 +29,19 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
 
-                .cors(cors -> {})
+
 
                 .authorizeExchange(exchange -> exchange
 
                         // CORS preflight
                         .pathMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
+
+                        // Actuator health checks
+                        .pathMatchers(
+                                "/actuator/health",
+                                "/actuator/health/**"
+                        )
                         .permitAll()
 
                         // Public authentication endpoints
@@ -75,3 +82,4 @@ public class SecurityConfig {
                 .build();
     }
 }
+

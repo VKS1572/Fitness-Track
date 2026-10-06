@@ -1,38 +1,118 @@
 services:
 
+  # =========================
+  # MySQL
+  # =========================
   mysql:
     image: mysql:8.0
     container_name: fittrack-mysql
+
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
     ports:
       - "3307:3306"
+
     volumes:
       - mysql_data:/var/lib/mysql
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-p${MYSQL_ROOT_PASSWORD}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # Redis
+  # =========================
+  redis:
+    image: redis:7-alpine
+
+    container_name: fittrack-redis
+
+    command: redis-server --appendonly yes
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - fittrack-network
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+
+  # =========================
+  # Eureka Service Registry
+  # =========================
   service-registry:
     build:
       context: ./service-registry
+
     image: fittrack-service-registry
     container_name: fittrack-service-registry
+
     ports:
       - "8761:8761"
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8761/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # User Service
+  # =========================
   user-service:
     build:
       context: ./user-service
+
     image: fittrack-user-service
     container_name: fittrack-user-service
+
     ports:
       - "8081:8081"
+
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://fittrack-mysql:3306/fitness_user_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_APP_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_APP_PASSWORD}
 
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://fittrack-service-registry:8761/eureka/
 
@@ -42,91 +122,202 @@ services:
       JWT_SECRET: ${JWT_SECRET}
 
     depends_on:
-      - mysql
-      - service-registry
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8081/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # Activity Service
+  # =========================
   activity-service:
     build:
       context: ./activity-service
+
     image: fittrack-activity-service
     container_name: fittrack-activity-service
+
     ports:
       - "8082:8082"
+
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://fittrack-mysql:3306/fitness_activity_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_APP_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_APP_PASSWORD}
 
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://fittrack-service-registry:8761/eureka/
 
     depends_on:
-      - mysql
-      - service-registry
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8082/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # Recommendation Service
+  # =========================
   recommendation-service:
     build:
       context: ./recommendation-service
+
     image: fittrack-recommendation-service
     container_name: fittrack-recommendation-service
+
     ports:
       - "8083:8083"
+
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://fittrack-service-registry:8761/eureka/
 
     depends_on:
-      - service-registry
+      service-registry:
+        condition: service_healthy
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8083/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # Notification Service
+  # =========================
   notification-service:
     build:
       context: ./notification-service
+
     image: fittrack-notification-service
     container_name: fittrack-notification-service
+
     ports:
       - "8084:8084"
+
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://fittrack-mysql:3306/fitness_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_APP_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_APP_PASSWORD}
 
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://fittrack-service-registry:8761/eureka/
 
     depends_on:
-      - mysql
-      - service-registry
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8084/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  # =========================
+  # API Gateway
+  # =========================
   api-gateway:
     build:
       context: ./api-gateway
+
     image: fittrack-api-gateway
     container_name: fittrack-api-gateway
+
     ports:
       - "8080:8080"
+
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://fittrack-service-registry:8761/eureka/
-
       JWT_SECRET: ${JWT_SECRET}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
 
     depends_on:
-      - service-registry
-      - user-service
-      - activity-service
-      - recommendation-service
-      - notification-service
+      service-registry:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+      activity-service:
+        condition: service_healthy
+      recommendation-service:
+        condition: service_healthy
+      notification-service:
+        condition: service_healthy
+
     networks:
       - fittrack-network
 
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8080/actuator/health || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+# =========================
+# Network
+# =========================
 networks:
   fittrack-network:
     name: fittrack-network
     driver: bridge
 
+
+# =========================
+# Volumes
+# =========================
 volumes:
   mysql_data:
+
+  redis_data:
+    name: fitness-track_redis_data

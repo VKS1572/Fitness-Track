@@ -2,6 +2,11 @@ spring:
   application:
     name: api-gateway
 
+  data:
+    redis:
+      host: redis
+      port: 6379
+
   cloud:
     gateway:
       server:
@@ -13,7 +18,7 @@ spring:
             cors-configurations:
               "[/**]":
                 allowedOrigins:
-                  - "http://localhost:5173"
+                  - "${CORS_ALLOWED_ORIGINS:http://localhost:5173}"
 
                 allowedMethods:
                   - GET
@@ -23,7 +28,12 @@ spring:
                   - OPTIONS
 
                 allowedHeaders:
-                  - "*"
+                  - Authorization
+                  - Content-Type
+                  - Accept
+
+                exposedHeaders:
+                  - Authorization
 
                 allowCredentials: true
 
@@ -32,6 +42,13 @@ spring:
               uri: lb://USER-SERVICE
               predicates:
                 - Path=/api/users/**
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 5
+                    redis-rate-limiter.burstCapacity: 10
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"
 
             - id: activity-service
               uri: lb://ACTIVITY-SERVICE
@@ -42,10 +59,12 @@ spring:
               uri: lb://RECOMMENDATION-SERVICE
               predicates:
                 - Path=/api/recommendations/**
+
             - id: notification-service
               uri: lb://NOTIFICATION-SERVICE
               predicates:
                 - Path=/api/notifications/**
+
 server:
   port: 8080
 
@@ -75,5 +94,5 @@ jwt:
 
 logging:
   level:
-    org.springframework.security: DEBUG
-    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: INFO
+    org.springframework.cloud.gateway: INFO

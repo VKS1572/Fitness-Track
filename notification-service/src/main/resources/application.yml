@@ -1,26 +1,38 @@
-server:
-  port: 8084
+  server:
+    port: 8084
 
-spring:
-  application:
-    name: notification-service
+  spring:
+    application:
+      name: notification-service
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/fitness_db
-    username: root
-    password: Vik@s1572
+    datasource:
+      url: jdbc:mysql://localhost:3306/fitness_db
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+      register-with-eureka: true
+      fetch-registry: true
 
-  instance:
-    prefer-ip-address: true
+    instance:
+      prefer-ip-address: true
+
+  # Actuator
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,info
+    endpoint:
+      health:
+        probes:
+          enabled: true
+
