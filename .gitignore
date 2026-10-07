@@ -20,7 +20,7 @@ dist/
 
 # OS files
 .DS_Store
-Thumbs.dbfittrack_backup.sql
+Thumbs.db
 
 # Local database backups
 fittrack_backup.sql
