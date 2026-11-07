@@ -75,7 +75,7 @@ services:
     build:
       context: ./service-registry
 
-    image: fittrack-service-registry
+    image: fittrack-service-registry:v2
     container_name: fittrack-service-registry
 
     ports:
@@ -103,7 +103,7 @@ services:
     build:
       context: ./user-service
 
-    image: fittrack-user-service
+    image: fittrack-user-service:v2
     container_name: fittrack-user-service
 
     ports:
@@ -150,7 +150,7 @@ services:
     build:
       context: ./activity-service
 
-    image: fittrack-activity-service
+    image: fittrack-activity-service:v2
     container_name: fittrack-activity-service
 
     ports:
@@ -191,7 +191,7 @@ services:
     build:
       context: ./recommendation-service
 
-    image: fittrack-recommendation-service
+    image: fittrack-recommendation-service:v2
     container_name: fittrack-recommendation-service
 
     ports:
@@ -226,7 +226,7 @@ services:
     build:
       context: ./notification-service
 
-    image: fittrack-notification-service
+    image: fittrack-notification-service:v2
     container_name: fittrack-notification-service
 
     ports:
@@ -267,7 +267,7 @@ services:
     build:
       context: ./api-gateway
 
-    image: fittrack-api-gateway
+    image: fittrack-api-gateway:v2
     container_name: fittrack-api-gateway
 
     ports:
